@@ -28,73 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
+            this.tabCtrlMain = new System.Windows.Forms.TabControl();
+            this.pageBackPropagation = new System.Windows.Forms.TabPage();
+            this.pageLevenberg = new System.Windows.Forms.TabPage();
+            this.pageHopfield = new System.Windows.Forms.TabPage();
+            this.tabCtrlMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabCtrlMain
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(13, 13);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(831, 476);
-            this.tabControl1.TabIndex = 0;
+            this.tabCtrlMain.Controls.Add(this.pageBackPropagation);
+            this.tabCtrlMain.Controls.Add(this.pageLevenberg);
+            this.tabCtrlMain.Controls.Add(this.pageHopfield);
+            this.tabCtrlMain.Location = new System.Drawing.Point(13, 13);
+            this.tabCtrlMain.Name = "tabCtrlMain";
+            this.tabCtrlMain.SelectedIndex = 0;
+            this.tabCtrlMain.Size = new System.Drawing.Size(831, 476);
+            this.tabCtrlMain.TabIndex = 0;
             // 
-            // tabPage1
+            // pageBackPropagation
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(823, 366);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.pageBackPropagation.Location = new System.Drawing.Point(4, 22);
+            this.pageBackPropagation.Name = "pageBackPropagation";
+            this.pageBackPropagation.Padding = new System.Windows.Forms.Padding(3);
+            this.pageBackPropagation.Size = new System.Drawing.Size(823, 450);
+            this.pageBackPropagation.TabIndex = 0;
+            this.pageBackPropagation.Text = "BackPropagation";
+            this.pageBackPropagation.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // pageLevenberg
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(823, 366);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.pageLevenberg.Location = new System.Drawing.Point(4, 22);
+            this.pageLevenberg.Name = "pageLevenberg";
+            this.pageLevenberg.Padding = new System.Windows.Forms.Padding(3);
+            this.pageLevenberg.Size = new System.Drawing.Size(823, 450);
+            this.pageLevenberg.TabIndex = 1;
+            this.pageLevenberg.Text = "Levenberg";
+            this.pageLevenberg.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // pageHopfield
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(823, 450);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.pageHopfield.Location = new System.Drawing.Point(4, 22);
+            this.pageHopfield.Name = "pageHopfield";
+            this.pageHopfield.Padding = new System.Windows.Forms.Padding(3);
+            this.pageHopfield.Size = new System.Drawing.Size(823, 450);
+            this.pageHopfield.TabIndex = 2;
+            this.pageHopfield.Text = "Hopfield";
+            this.pageHopfield.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 501);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabCtrlMain);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.tabControl1.ResumeLayout(false);
+            this.tabCtrlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabControl tabCtrlMain;
+        private System.Windows.Forms.TabPage pageBackPropagation;
+        private System.Windows.Forms.TabPage pageLevenberg;
+        private System.Windows.Forms.TabPage pageHopfield;
     }
 }
 
