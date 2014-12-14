@@ -45,6 +45,8 @@
             this.pageLevenberg = new System.Windows.Forms.TabPage();
             this.pageHopfield = new System.Windows.Forms.TabPage();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
+            this.lblMomentum = new System.Windows.Forms.Label();
+            this.txtbxMomentum = new System.Windows.Forms.TextBox();
             this.tabCtrlMain.SuspendLayout();
             this.pageBackPropagation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).BeginInit();
@@ -65,7 +67,9 @@
             // pageBackPropagation
             // 
             this.pageBackPropagation.BackColor = System.Drawing.Color.Transparent;
+            this.pageBackPropagation.Controls.Add(this.txtbxMomentum);
             this.pageBackPropagation.Controls.Add(this.txtbxLearningRate);
+            this.pageBackPropagation.Controls.Add(this.lblMomentum);
             this.pageBackPropagation.Controls.Add(this.lblLearningRate);
             this.pageBackPropagation.Controls.Add(this.btnAddLayer);
             this.pageBackPropagation.Controls.Add(this.btnRemoveLayer);
@@ -85,15 +89,15 @@
             // 
             // txtbxLearningRate
             // 
-            this.txtbxLearningRate.Location = new System.Drawing.Point(709, 133);
+            this.txtbxLearningRate.Location = new System.Drawing.Point(689, 133);
             this.txtbxLearningRate.Name = "txtbxLearningRate";
-            this.txtbxLearningRate.Size = new System.Drawing.Size(105, 20);
+            this.txtbxLearningRate.Size = new System.Drawing.Size(37, 20);
             this.txtbxLearningRate.TabIndex = 10;
             this.txtbxLearningRate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
             // 
             // lblLearningRate
             // 
-            this.lblLearningRate.Location = new System.Drawing.Point(677, 136);
+            this.lblLearningRate.Location = new System.Drawing.Point(657, 136);
             this.lblLearningRate.Name = "lblLearningRate";
             this.lblLearningRate.Size = new System.Drawing.Size(26, 18);
             this.lblLearningRate.TabIndex = 9;
@@ -229,6 +233,22 @@
             this.ofdlgLoadData.Filter = "Excel Worksheets|*.xlsx|CSV Format|*.csv";
             this.ofdlgLoadData.Title = "Load Data";
             // 
+            // lblMomentum
+            // 
+            this.lblMomentum.Location = new System.Drawing.Point(736, 136);
+            this.lblMomentum.Name = "lblMomentum";
+            this.lblMomentum.Size = new System.Drawing.Size(26, 18);
+            this.lblMomentum.TabIndex = 9;
+            this.lblMomentum.Text = "μ = ";
+            // 
+            // txtbxMomentum
+            // 
+            this.txtbxMomentum.Location = new System.Drawing.Point(768, 133);
+            this.txtbxMomentum.Name = "txtbxMomentum";
+            this.txtbxMomentum.Size = new System.Drawing.Size(37, 20);
+            this.txtbxMomentum.TabIndex = 10;
+            this.txtbxMomentum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +285,8 @@
         private System.Windows.Forms.Label lblLearningRate;
         private System.Windows.Forms.TextBox txtbxLearningRate;
         private System.Windows.Forms.OpenFileDialog ofdlgLoadData;
+        private System.Windows.Forms.TextBox txtbxMomentum;
+        private System.Windows.Forms.Label lblMomentum;
     }
 }
 
