@@ -30,11 +30,13 @@
         {
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
             this.pageBackPropagation = new System.Windows.Forms.TabPage();
+            this.txtbxLearningRate = new System.Windows.Forms.TextBox();
+            this.lblLearningRate = new System.Windows.Forms.Label();
+            this.btnAddLayer = new System.Windows.Forms.Button();
+            this.btnRemoveLayer = new System.Windows.Forms.Button();
             this.dgviewLoadedData = new System.Windows.Forms.DataGridView();
             this.gboxNetTopology = new System.Windows.Forms.GroupBox();
             this.pnlNetTopology = new System.Windows.Forms.Panel();
-            this.btnRemoveLayer = new System.Windows.Forms.Button();
-            this.btnAddLayer = new System.Windows.Forms.Button();
             this.pnlStatistics = new System.Windows.Forms.Panel();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnSetNetwork = new System.Windows.Forms.Button();
@@ -42,6 +44,7 @@
             this.btnLoadData = new System.Windows.Forms.Button();
             this.pageLevenberg = new System.Windows.Forms.TabPage();
             this.pageHopfield = new System.Windows.Forms.TabPage();
+            this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
             this.tabCtrlMain.SuspendLayout();
             this.pageBackPropagation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).BeginInit();
@@ -62,6 +65,8 @@
             // pageBackPropagation
             // 
             this.pageBackPropagation.BackColor = System.Drawing.Color.Transparent;
+            this.pageBackPropagation.Controls.Add(this.txtbxLearningRate);
+            this.pageBackPropagation.Controls.Add(this.lblLearningRate);
             this.pageBackPropagation.Controls.Add(this.btnAddLayer);
             this.pageBackPropagation.Controls.Add(this.btnRemoveLayer);
             this.pageBackPropagation.Controls.Add(this.dgviewLoadedData);
@@ -78,12 +83,56 @@
             this.pageBackPropagation.TabIndex = 0;
             this.pageBackPropagation.Text = "BackPropagation";
             // 
+            // txtbxLearningRate
+            // 
+            this.txtbxLearningRate.Location = new System.Drawing.Point(709, 133);
+            this.txtbxLearningRate.Name = "txtbxLearningRate";
+            this.txtbxLearningRate.Size = new System.Drawing.Size(105, 20);
+            this.txtbxLearningRate.TabIndex = 10;
+            this.txtbxLearningRate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
+            // 
+            // lblLearningRate
+            // 
+            this.lblLearningRate.Location = new System.Drawing.Point(677, 136);
+            this.lblLearningRate.Name = "lblLearningRate";
+            this.lblLearningRate.Size = new System.Drawing.Size(26, 18);
+            this.lblLearningRate.TabIndex = 9;
+            this.lblLearningRate.Text = "α = ";
+            // 
+            // btnAddLayer
+            // 
+            this.btnAddLayer.Location = new System.Drawing.Point(455, 131);
+            this.btnAddLayer.Name = "btnAddLayer";
+            this.btnAddLayer.Size = new System.Drawing.Size(95, 23);
+            this.btnAddLayer.TabIndex = 6;
+            this.btnAddLayer.Text = "Add Layer";
+            this.btnAddLayer.UseVisualStyleBackColor = true;
+            this.btnAddLayer.Click += new System.EventHandler(this.AddLayerClick);
+            // 
+            // btnRemoveLayer
+            // 
+            this.btnRemoveLayer.Enabled = false;
+            this.btnRemoveLayer.Location = new System.Drawing.Point(556, 131);
+            this.btnRemoveLayer.Name = "btnRemoveLayer";
+            this.btnRemoveLayer.Size = new System.Drawing.Size(95, 23);
+            this.btnRemoveLayer.TabIndex = 7;
+            this.btnRemoveLayer.Text = "Remove Layer";
+            this.btnRemoveLayer.UseVisualStyleBackColor = true;
+            this.btnRemoveLayer.Click += new System.EventHandler(this.RemoveLayerClick);
+            // 
             // dgviewLoadedData
             // 
+            this.dgviewLoadedData.AllowUserToAddRows = false;
+            this.dgviewLoadedData.AllowUserToDeleteRows = false;
+            this.dgviewLoadedData.AllowUserToResizeColumns = false;
+            this.dgviewLoadedData.AllowUserToResizeRows = false;
+            this.dgviewLoadedData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgviewLoadedData.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.dgviewLoadedData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgviewLoadedData.Location = new System.Drawing.Point(455, 195);
             this.dgviewLoadedData.Name = "dgviewLoadedData";
+            this.dgviewLoadedData.RowHeadersVisible = false;
+            this.dgviewLoadedData.ShowEditingIcon = false;
             this.dgviewLoadedData.Size = new System.Drawing.Size(359, 220);
             this.dgviewLoadedData.TabIndex = 8;
             // 
@@ -106,27 +155,6 @@
             this.pnlNetTopology.Size = new System.Drawing.Size(356, 103);
             this.pnlNetTopology.TabIndex = 0;
             // 
-            // btnRemoveLayer
-            // 
-            this.btnRemoveLayer.Enabled = false;
-            this.btnRemoveLayer.Location = new System.Drawing.Point(644, 134);
-            this.btnRemoveLayer.Name = "btnRemoveLayer";
-            this.btnRemoveLayer.Size = new System.Drawing.Size(95, 23);
-            this.btnRemoveLayer.TabIndex = 7;
-            this.btnRemoveLayer.Text = "Remove Layer";
-            this.btnRemoveLayer.UseVisualStyleBackColor = true;
-            this.btnRemoveLayer.Click += new System.EventHandler(this.RemoveLayerClick);
-            // 
-            // btnAddLayer
-            // 
-            this.btnAddLayer.Location = new System.Drawing.Point(543, 134);
-            this.btnAddLayer.Name = "btnAddLayer";
-            this.btnAddLayer.Size = new System.Drawing.Size(95, 23);
-            this.btnAddLayer.TabIndex = 6;
-            this.btnAddLayer.Text = "Add Layer";
-            this.btnAddLayer.UseVisualStyleBackColor = true;
-            this.btnAddLayer.Click += new System.EventHandler(this.AddLayerClick);
-            // 
             // pnlStatistics
             // 
             this.pnlStatistics.Location = new System.Drawing.Point(3, 6);
@@ -142,34 +170,38 @@
             this.btnTest.TabIndex = 4;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.TestNetworkClick);
             // 
             // btnSetNetwork
             // 
             this.btnSetNetwork.Enabled = false;
-            this.btnSetNetwork.Location = new System.Drawing.Point(606, 166);
+            this.btnSetNetwork.Location = new System.Drawing.Point(596, 166);
             this.btnSetNetwork.Name = "btnSetNetwork";
             this.btnSetNetwork.Size = new System.Drawing.Size(75, 23);
             this.btnSetNetwork.TabIndex = 0;
             this.btnSetNetwork.Text = "Set Network";
             this.btnSetNetwork.UseVisualStyleBackColor = true;
+            this.btnSetNetwork.Click += new System.EventHandler(this.SetNetworkClick);
             // 
             // btnTrain
             // 
-            this.btnTrain.Location = new System.Drawing.Point(606, 421);
+            this.btnTrain.Location = new System.Drawing.Point(596, 421);
             this.btnTrain.Name = "btnTrain";
             this.btnTrain.Size = new System.Drawing.Size(75, 23);
             this.btnTrain.TabIndex = 2;
             this.btnTrain.Text = "Train";
             this.btnTrain.UseVisualStyleBackColor = true;
+            this.btnTrain.Click += new System.EventHandler(this.TrainNetrworkClick);
             // 
             // btnLoadData
             // 
-            this.btnLoadData.Location = new System.Drawing.Point(461, 421);
+            this.btnLoadData.Location = new System.Drawing.Point(455, 421);
             this.btnLoadData.Name = "btnLoadData";
             this.btnLoadData.Size = new System.Drawing.Size(75, 23);
             this.btnLoadData.TabIndex = 1;
             this.btnLoadData.Text = "Load Data";
             this.btnLoadData.UseVisualStyleBackColor = true;
+            this.btnLoadData.Click += new System.EventHandler(this.LoadDataClick);
             // 
             // pageLevenberg
             // 
@@ -191,6 +223,12 @@
             this.pageHopfield.TabIndex = 2;
             this.pageHopfield.Text = "Hopfield";
             // 
+            // ofdlgLoadData
+            // 
+            this.ofdlgLoadData.DefaultExt = "xls";
+            this.ofdlgLoadData.Filter = "Excel Worksheets|*.xlsx|CSV Format|*.csv";
+            this.ofdlgLoadData.Title = "Load Data";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,6 +239,7 @@
             this.Text = "Neural Network Examples";
             this.tabCtrlMain.ResumeLayout(false);
             this.pageBackPropagation.ResumeLayout(false);
+            this.pageBackPropagation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).EndInit();
             this.gboxNetTopology.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -223,6 +262,9 @@
         private System.Windows.Forms.Panel pnlNetTopology;
         private System.Windows.Forms.DataGridView dgviewLoadedData;
         private System.Windows.Forms.Button btnRemoveLayer;
+        private System.Windows.Forms.Label lblLearningRate;
+        private System.Windows.Forms.TextBox txtbxLearningRate;
+        private System.Windows.Forms.OpenFileDialog ofdlgLoadData;
     }
 }
 
