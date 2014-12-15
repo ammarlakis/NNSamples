@@ -7,8 +7,10 @@ using System.IO;
 using System.Windows.Forms;
 using Accord.IO;
 using Accord.Math;
+using AForge;
 using AForge.Neuro;
 using AForge.Neuro.Learning;
+using AForge.Controls;
 
 namespace NeuralNetworksProject
 {
@@ -66,7 +68,7 @@ namespace NeuralNetworksProject
             int[] layers = new int[layersControls.Count - 1];
             for (int i = 1; i < layersControls.Count - 1; i++)
             {
-                layers[i] = int.Parse(((NumericUpDown) layersControls[i].Controls[1]).Text);
+                layers[i-1] = int.Parse(((NumericUpDown) layersControls[i].Controls[1]).Text);
             }
             actNet = new ActivationNetwork(new SigmoidFunction(),inputLayerSize,layers);
         }
@@ -101,33 +103,42 @@ namespace NeuralNetworksProject
             {
                 btnTrain.Text = "Stop";
                 stopTraining = false;
-                //ArrayList errorList = new ArrayList();
-                //BackPropagationLearning backPropagation = new BackPropagationLearning(actNet);
-                //backPropagation.LearningRate = double.Parse(txtbxLearningRate.Text);
-                //backPropagation.Momentum = double.Parse(txtbxMomentum.Text);
-                //int iterations = 50;
-                //double errorLimit = 0;
-                //double[][] input = new double[4][];
-                //input[0] = new double[] { 0, 0 };
-                //input[1] = new double[] { 0, 1 };
-                //input[2] = new double[] { 1, 0 };
-                //input[3] = new double[] { 1, 1 };
-                //double[][] output = new double[4][] {
-                //                             new double[] {0},
-                //                             new double[] {1},
-                //                             new double[] {1},
-                //                             new double[] {0}
-                //                         };
-                //while (!stopTraining)
-                //{
-                //    double error = backPropagation.RunEpoch(input, output);
-                //    errorList.Add(error);
-                //    if (iterations == 0)
-                //    {
-                //        break;
-                //    }
-                //    iterations--;
-                //}
+                ArrayList errorsList = new ArrayList();
+                BackPropagationLearning backPropagation = new BackPropagationLearning(actNet);
+                backPropagation.LearningRate = double.Parse(txtbxLearningRate.Text);
+                backPropagation.Momentum = double.Parse(txtbxMomentum.Text);
+                int iterations = 20;
+                double errorLimit = 0.2;
+                double[][] input = new double[4][] {
+											new double[] {0, 0},
+											new double[] {0, 1},
+											new double[] {1, 0},
+											new double[] {1, 1}
+										};
+                double[][] output = new double[4][] {
+											 new double[] {0},
+											 new double[] {1},
+											 new double[] {1},
+											 new double[] {0}
+										 };
+                while (!stopTraining)
+                {
+                    double error = backPropagation.RunEpoch(input, output);
+                    errorsList.Add(error);
+                    if (stopTraining || ((error <= errorLimit) && (iterations == 0)))
+                    {
+                        break;
+                    }
+                    iterations--;
+                }
+                double[,] errors = new double[errorsList.Count, 2];
+                for (int i = 0, n = errorsList.Count; i < n; i++)
+                {
+                    errors[i, 0] = i;
+                    errors[i, 1] = (double)errorsList[i];
+                }
+                chrtError.RangeX = new Range(0, errorsList.Count - 1);
+                chrtError.UpdateDataSeries("error", errors);
             }
         }
 
