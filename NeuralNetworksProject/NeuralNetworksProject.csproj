@@ -35,8 +35,17 @@
     <Reference Include="Accord">
       <HintPath>..\packages\Accord.2.14.0\lib\net40\Accord.dll</HintPath>
     </Reference>
+    <Reference Include="Accord.Controls">
+      <HintPath>..\packages\Accord.Controls.2.14.0\lib\net40\Accord.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Imaging">
+      <HintPath>..\packages\Accord.Imaging.2.14.0\lib\net40\Accord.Imaging.dll</HintPath>
+    </Reference>
     <Reference Include="Accord.IO">
       <HintPath>..\packages\Accord.IO.2.14.0\lib\net40\Accord.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.MachineLearning">
+      <HintPath>..\packages\Accord.MachineLearning.2.14.0\lib\net40\Accord.MachineLearning.dll</HintPath>
     </Reference>
     <Reference Include="Accord.MachineLearning.GPL">
       <HintPath>..\packages\Accord.MachineLearning.GPL.2.14.0\lib\net40\Accord.MachineLearning.GPL.dll</HintPath>
@@ -53,8 +62,14 @@
     <Reference Include="AForge">
       <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
     </Reference>
+    <Reference Include="AForge.Controls">
+      <HintPath>..\packages\AForge.Controls.2.2.5\lib\AForge.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="AForge.Genetic">
       <HintPath>..\packages\AForge.Genetic.2.2.5\lib\AForge.Genetic.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging">
+      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Math">
       <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
@@ -62,8 +77,12 @@
     <Reference Include="AForge.Neuro">
       <HintPath>..\packages\AForge.Neuro.2.2.5\lib\AForge.Neuro.dll</HintPath>
     </Reference>
+    <Reference Include="AForge.Video">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

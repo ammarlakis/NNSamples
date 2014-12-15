@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Accord.IO;
 using Accord.Math;
@@ -21,10 +17,15 @@ namespace NeuralNetworksProject
         private static Collection<UserControl>  layersControls = new Collection<UserControl>();
         private ActivationNetwork actNet;
         private DataTable dataTable;
+        private ArrayList errors = new ArrayList();
+        private AForge.Controls.Chart chrtError;
+        private bool stopTraining = true;
+
         public MainForm()
          {
             InitializeComponent();
-        }
+            chrtError.AddDataSeries("error", Color.Red, AForge.Controls.Chart.SeriesType.Line, 1);
+         }
 
         private void AddLayerClick(object sender, EventArgs e)
         {
@@ -91,30 +92,70 @@ namespace NeuralNetworksProject
 
         private void TrainNetrworkClick(object sender, EventArgs e)
         {
-            BackPropagationLearning backprob = new BackPropagationLearning(actNet);
-            backprob.LearningRate = double.Parse(txtbxLearningRate.Text);
-            backprob.Momentum = 0.0;
-            int iteration = 5001;
-            double hata = 0.0;
-            //while (!dongu)
-            //{
-            //    hata = backprob.RunEpoch(this._inputData, this._outputData);
-            //    iteration--;
-
-            //    if (iteration < 1 || hata < 0.01)
-            //        break;
-
-            //}
-            //MessageBox.Show("Hata oranı: " + hata);
+            if (!stopTraining)
+            {
+                btnTrain.Text = "Train";
+                stopTraining = true;
+            }
+            else
+            {
+                btnTrain.Text = "Stop";
+                stopTraining = false;
+                //ArrayList errorList = new ArrayList();
+                //BackPropagationLearning backPropagation = new BackPropagationLearning(actNet);
+                //backPropagation.LearningRate = double.Parse(txtbxLearningRate.Text);
+                //backPropagation.Momentum = double.Parse(txtbxMomentum.Text);
+                //int iterations = 50;
+                //double errorLimit = 0;
+                //double[][] input = new double[4][];
+                //input[0] = new double[] { 0, 0 };
+                //input[1] = new double[] { 0, 1 };
+                //input[2] = new double[] { 1, 0 };
+                //input[3] = new double[] { 1, 1 };
+                //double[][] output = new double[4][] {
+                //                             new double[] {0},
+                //                             new double[] {1},
+                //                             new double[] {1},
+                //                             new double[] {0}
+                //                         };
+                //while (!stopTraining)
+                //{
+                //    double error = backPropagation.RunEpoch(input, output);
+                //    errorList.Add(error);
+                //    if (iterations == 0)
+                //    {
+                //        break;
+                //    }
+                //    iterations--;
+                //}
+            }
         }
 
         private void TestNetworkClick(object sender, EventArgs e)
         {
-            //for ( int i = 0; i < _inputData.Length; i++ )
-            //{
-            //   actNet.Compute( _inputData[i] );
-            //   MessageBox.Show("Expected Output: " + _outputData[i][0] + "\n" + "Computed Value: " + actNet.Output[0] + "\n" + "Distance Value: " + Math.Abs( _outputData[i][0] - actNet.Output[0] ));
-            //}
+            double[][] input = new double[4][];
+            input[0] = new double[]{0,0};
+            input[1] = new double[]{0,1};
+            input[2] = new double[]{1,0};
+            input[3] = new double[]{1,1};
+            double[][] output = new double[4][] {
+											 new double[] {0},
+											 new double[] {1},
+											 new double[] {1},
+											 new double[] {0}
+										 };
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                actNet.Compute(input.GetRow(i));
+                MessageBox.Show(Math.Abs(output[i][0] - actNet.Output[0]).ToString());
+            }
+        }
+
+        private void dgviewLoadedData_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show("Test");
         }
     }
 }
+

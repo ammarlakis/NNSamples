@@ -1,4 +1,6 @@
-﻿namespace NeuralNetworksProject
+﻿using System.Drawing;
+
+namespace NeuralNetworksProject
 {
     partial class MainForm
     {
@@ -30,14 +32,16 @@
         {
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
             this.pageBackPropagation = new System.Windows.Forms.TabPage();
+            this.txtbxMomentum = new System.Windows.Forms.TextBox();
             this.txtbxLearningRate = new System.Windows.Forms.TextBox();
+            this.lblMomentum = new System.Windows.Forms.Label();
             this.lblLearningRate = new System.Windows.Forms.Label();
             this.btnAddLayer = new System.Windows.Forms.Button();
             this.btnRemoveLayer = new System.Windows.Forms.Button();
             this.dgviewLoadedData = new System.Windows.Forms.DataGridView();
             this.gboxNetTopology = new System.Windows.Forms.GroupBox();
             this.pnlNetTopology = new System.Windows.Forms.Panel();
-            this.pnlStatistics = new System.Windows.Forms.Panel();
+            this.pnlChart = new System.Windows.Forms.Panel();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnSetNetwork = new System.Windows.Forms.Button();
             this.btnTrain = new System.Windows.Forms.Button();
@@ -45,8 +49,7 @@
             this.pageLevenberg = new System.Windows.Forms.TabPage();
             this.pageHopfield = new System.Windows.Forms.TabPage();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
-            this.lblMomentum = new System.Windows.Forms.Label();
-            this.txtbxMomentum = new System.Windows.Forms.TextBox();
+            this.chrtError = new AForge.Controls.Chart();
             this.tabCtrlMain.SuspendLayout();
             this.pageBackPropagation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).BeginInit();
@@ -75,7 +78,7 @@
             this.pageBackPropagation.Controls.Add(this.btnRemoveLayer);
             this.pageBackPropagation.Controls.Add(this.dgviewLoadedData);
             this.pageBackPropagation.Controls.Add(this.gboxNetTopology);
-            this.pageBackPropagation.Controls.Add(this.pnlStatistics);
+            this.pageBackPropagation.Controls.Add(this.pnlChart);
             this.pageBackPropagation.Controls.Add(this.btnTest);
             this.pageBackPropagation.Controls.Add(this.btnSetNetwork);
             this.pageBackPropagation.Controls.Add(this.btnTrain);
@@ -87,6 +90,14 @@
             this.pageBackPropagation.TabIndex = 0;
             this.pageBackPropagation.Text = "BackPropagation";
             // 
+            // txtbxMomentum
+            // 
+            this.txtbxMomentum.Location = new System.Drawing.Point(768, 133);
+            this.txtbxMomentum.Name = "txtbxMomentum";
+            this.txtbxMomentum.Size = new System.Drawing.Size(37, 20);
+            this.txtbxMomentum.TabIndex = 10;
+            this.txtbxMomentum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
+            // 
             // txtbxLearningRate
             // 
             this.txtbxLearningRate.Location = new System.Drawing.Point(689, 133);
@@ -94,6 +105,14 @@
             this.txtbxLearningRate.Size = new System.Drawing.Size(37, 20);
             this.txtbxLearningRate.TabIndex = 10;
             this.txtbxLearningRate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
+            // 
+            // lblMomentum
+            // 
+            this.lblMomentum.Location = new System.Drawing.Point(736, 136);
+            this.lblMomentum.Name = "lblMomentum";
+            this.lblMomentum.Size = new System.Drawing.Size(26, 18);
+            this.lblMomentum.TabIndex = 9;
+            this.lblMomentum.Text = "μ = ";
             // 
             // lblLearningRate
             // 
@@ -139,6 +158,7 @@
             this.dgviewLoadedData.ShowEditingIcon = false;
             this.dgviewLoadedData.Size = new System.Drawing.Size(359, 220);
             this.dgviewLoadedData.TabIndex = 8;
+            this.dgviewLoadedData.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgviewLoadedData_CellEndEdit);
             // 
             // gboxNetTopology
             // 
@@ -159,12 +179,13 @@
             this.pnlNetTopology.Size = new System.Drawing.Size(356, 103);
             this.pnlNetTopology.TabIndex = 0;
             // 
-            // pnlStatistics
+            // pnlChart
             // 
-            this.pnlStatistics.Location = new System.Drawing.Point(3, 6);
-            this.pnlStatistics.Name = "pnlStatistics";
-            this.pnlStatistics.Size = new System.Drawing.Size(446, 438);
-            this.pnlStatistics.TabIndex = 5;
+            this.pnlChart.Controls.Add(this.chrtError);
+            this.pnlChart.Location = new System.Drawing.Point(3, 6);
+            this.pnlChart.Name = "pnlChart";
+            this.pnlChart.Size = new System.Drawing.Size(446, 438);
+            this.pnlChart.TabIndex = 5;
             // 
             // btnTest
             // 
@@ -232,22 +253,15 @@
             this.ofdlgLoadData.DefaultExt = "xls";
             this.ofdlgLoadData.Filter = "Excel Worksheets|*.xlsx|CSV Format|*.csv";
             this.ofdlgLoadData.Title = "Load Data";
-            // 
-            // lblMomentum
-            // 
-            this.lblMomentum.Location = new System.Drawing.Point(736, 136);
-            this.lblMomentum.Name = "lblMomentum";
-            this.lblMomentum.Size = new System.Drawing.Size(26, 18);
-            this.lblMomentum.TabIndex = 9;
-            this.lblMomentum.Text = "μ = ";
-            // 
-            // txtbxMomentum
-            // 
-            this.txtbxMomentum.Location = new System.Drawing.Point(768, 133);
-            this.txtbxMomentum.Name = "txtbxMomentum";
-            this.txtbxMomentum.Size = new System.Drawing.Size(37, 20);
-            this.txtbxMomentum.TabIndex = 10;
-            this.txtbxMomentum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
+            //
+            // chrtError
+            //
+            this.chrtError.Location = new Point(10,10);
+            this.chrtError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chrtError.Name = "chrtError";
+            this.chrtError.Size = new Size(400,200);
+            this.chrtError.TabIndex = 2;
+            this.chrtError.Text = "Error Function";
             // 
             // MainForm
             // 
@@ -263,7 +277,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).EndInit();
             this.gboxNetTopology.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -277,7 +290,7 @@
         private System.Windows.Forms.Button btnLoadData;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Button btnAddLayer;
-        private System.Windows.Forms.Panel pnlStatistics;
+        private System.Windows.Forms.Panel pnlChart;
         private System.Windows.Forms.GroupBox gboxNetTopology;
         private System.Windows.Forms.Panel pnlNetTopology;
         private System.Windows.Forms.DataGridView dgviewLoadedData;
