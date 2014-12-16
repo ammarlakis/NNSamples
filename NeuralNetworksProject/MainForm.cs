@@ -4,13 +4,13 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using Accord.IO;
 using Accord.Math;
 using AForge;
 using AForge.Neuro;
 using AForge.Neuro.Learning;
-using AForge.Controls;
 
 namespace NeuralNetworksProject
 {
@@ -22,6 +22,7 @@ namespace NeuralNetworksProject
         private ArrayList errors = new ArrayList();
         private AForge.Controls.Chart chrtError;
         private bool stopTraining = true;
+        private Thread workerThread = null;
 
         public MainForm()
          {
@@ -98,50 +99,60 @@ namespace NeuralNetworksProject
             {
                 btnTrain.Text = "Train";
                 stopTraining = true;
+                while (!workerThread.Join(100))
+                {
+                    Application.DoEvents();
+                    workerThread = null;
+                }
             }
             else
             {
                 btnTrain.Text = "Stop";
-                stopTraining = false;
-                ArrayList errorsList = new ArrayList();
-                BackPropagationLearning backPropagation = new BackPropagationLearning(actNet);
-                backPropagation.LearningRate = double.Parse(txtbxLearningRate.Text);
-                backPropagation.Momentum = double.Parse(txtbxMomentum.Text);
-                int iterations = 20;
-                double errorLimit = 0.2;
-                double[][] input = new double[4][] {
+                workerThread = new Thread(new ThreadStart(Train));
+                workerThread.Start();
+            }
+        }
+
+        private void Train()
+        {
+            stopTraining = false;
+            ArrayList errorsList = new ArrayList();
+            BackPropagationLearning backPropagation = new BackPropagationLearning(actNet);
+            backPropagation.LearningRate = double.Parse(txtbxLearningRate.Text);
+            backPropagation.Momentum = double.Parse(txtbxMomentum.Text);
+            int iterations = 50;
+            double errorLimit = 0.2;
+            double[][] input = new double[4][] {
 											new double[] {0, 0},
 											new double[] {0, 1},
 											new double[] {1, 0},
 											new double[] {1, 1}
 										};
-                double[][] output = new double[4][] {
+            double[][] output = new double[4][] {
 											 new double[] {0},
 											 new double[] {1},
 											 new double[] {1},
 											 new double[] {0}
 										 };
-                while (!stopTraining)
+            while (!stopTraining)
+            {
+                double error = backPropagation.RunEpoch(input, output);
+                errorsList.Add(error);
+                if (stopTraining || ((error <= errorLimit) && (iterations == 0)))
                 {
-                    double error = backPropagation.RunEpoch(input, output);
-                    errorsList.Add(error);
-                    if (stopTraining || ((error <= errorLimit) && (iterations == 0)))
-                    {
-                        break;
-                    }
-                    iterations--;
+                    break;
                 }
-                double[,] errors = new double[errorsList.Count, 2];
-                for (int i = 0, n = errorsList.Count; i < n; i++)
-                {
-                    errors[i, 0] = i;
-                    errors[i, 1] = (double)errorsList[i];
-                }
-                chrtError.RangeX = new Range(0, errorsList.Count - 1);
-                chrtError.UpdateDataSeries("error", errors);
+                iterations--;
             }
+            double[,] errors = new double[errorsList.Count, 2];
+            for (int i = 0, n = errorsList.Count; i < n; i++)
+            {
+                errors[i, 0] = i;
+                errors[i, 1] = (double)errorsList[i];
+            }
+            chrtError.RangeX = new Range(0, errorsList.Count - 1);
+            chrtError.UpdateDataSeries("error", errors);
         }
-
         private void TestNetworkClick(object sender, EventArgs e)
         {
             double[][] input = new double[4][];
@@ -166,6 +177,18 @@ namespace NeuralNetworksProject
         private void dgviewLoadedData_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             MessageBox.Show("Test");
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ((workerThread != null) && workerThread.IsAlive)
+            {
+                stopTraining = true;
+                while (!workerThread.Join(100))
+                {
+                    Application.DoEvents();
+                }
+            }
         }
     }
 }

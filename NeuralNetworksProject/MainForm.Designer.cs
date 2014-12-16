@@ -30,6 +30,7 @@ namespace NeuralNetworksProject
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
             this.pageBackPropagation = new System.Windows.Forms.TabPage();
             this.txtbxMomentum = new System.Windows.Forms.TextBox();
@@ -42,6 +43,7 @@ namespace NeuralNetworksProject
             this.gboxNetTopology = new System.Windows.Forms.GroupBox();
             this.pnlNetTopology = new System.Windows.Forms.Panel();
             this.pnlChart = new System.Windows.Forms.Panel();
+            this.chrtError = new AForge.Controls.Chart();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnSetNetwork = new System.Windows.Forms.Button();
             this.btnTrain = new System.Windows.Forms.Button();
@@ -49,11 +51,11 @@ namespace NeuralNetworksProject
             this.pageLevenberg = new System.Windows.Forms.TabPage();
             this.pageHopfield = new System.Windows.Forms.TabPage();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
-            this.chrtError = new AForge.Controls.Chart();
             this.tabCtrlMain.SuspendLayout();
             this.pageBackPropagation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).BeginInit();
             this.gboxNetTopology.SuspendLayout();
+            this.pnlChart.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabCtrlMain
@@ -187,6 +189,17 @@ namespace NeuralNetworksProject
             this.pnlChart.Size = new System.Drawing.Size(446, 438);
             this.pnlChart.TabIndex = 5;
             // 
+            // chrtError
+            // 
+            this.chrtError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chrtError.Location = new System.Drawing.Point(0, 0);
+            this.chrtError.Name = "chrtError";
+            this.chrtError.RangeX = ((AForge.Range)(resources.GetObject("chrtError.RangeX")));
+            this.chrtError.RangeY = ((AForge.Range)(resources.GetObject("chrtError.RangeY")));
+            this.chrtError.Size = new System.Drawing.Size(446, 438);
+            this.chrtError.TabIndex = 2;
+            this.chrtError.Text = "Error Function";
+            // 
             // btnTest
             // 
             this.btnTest.Location = new System.Drawing.Point(739, 421);
@@ -253,15 +266,6 @@ namespace NeuralNetworksProject
             this.ofdlgLoadData.DefaultExt = "xls";
             this.ofdlgLoadData.Filter = "Excel Worksheets|*.xlsx|CSV Format|*.csv";
             this.ofdlgLoadData.Title = "Load Data";
-            //
-            // chrtError
-            //
-            this.chrtError.Location = new Point(10,10);
-            this.chrtError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chrtError.Name = "chrtError";
-            this.chrtError.Size = new Size(400,200);
-            this.chrtError.TabIndex = 2;
-            this.chrtError.Text = "Error Function";
             // 
             // MainForm
             // 
@@ -271,12 +275,15 @@ namespace NeuralNetworksProject
             this.Controls.Add(this.tabCtrlMain);
             this.Name = "MainForm";
             this.Text = "Neural Network Examples";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.tabCtrlMain.ResumeLayout(false);
             this.pageBackPropagation.ResumeLayout(false);
             this.pageBackPropagation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).EndInit();
             this.gboxNetTopology.ResumeLayout(false);
+            this.pnlChart.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         #endregion
