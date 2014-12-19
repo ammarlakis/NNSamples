@@ -28,6 +28,7 @@ namespace NeuralNetworksProject
         private double errorLimit;
         private double[][] input;
         private double[][] target;
+        private Methods selectedMethod = Methods.Backpropagation;
         private enum Methods
         {
             Backpropagation = 0, LevenbergMarquardt = 1
@@ -112,7 +113,15 @@ namespace NeuralNetworksProject
             }
             else
             {
-                
+                input = new double[dgviewLoadedData.RowCount][];
+                target = new double[dgviewLoadedData.RowCount][];
+                for (int i = 0; i < input.Length; i++)
+                {
+                    input[i] = dgviewLoadedData[0, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
+                    target[i] = dgviewLoadedData[1, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
+                }
+                MessageBox.Show(input[0][1].ToString());
+                MessageBox.Show(target[2][0].ToString());
                 if (!stopTraining)
                 {
                     btnTrain.Text = "Train";
@@ -125,6 +134,7 @@ namespace NeuralNetworksProject
                 }
                 else
                 {
+                    ShowTrainingInputDialog();
                     btnTrain.Text = "Stop";
                     workerThread = new Thread(new ThreadStart(Train));
                     workerThread.Start();
@@ -134,17 +144,16 @@ namespace NeuralNetworksProject
 
         private void Train()
         {
-            ShowTrainingInputDialog();
             stopTraining = false;
             ArrayList errorsList = new ArrayList();
             ISupervisedLearning teacher;
-            if ((Methods)comboAlgorithm.SelectedItem == Methods.Backpropagation)
+            if (selectedMethod == Methods.Backpropagation)
             {
                 teacher = new BackPropagationLearning(actNet);
                 ((BackPropagationLearning)teacher).LearningRate = double.Parse(txtbxLearningRate.Text);
                 ((BackPropagationLearning)teacher).Momentum = double.Parse(txtbxMomentum.Text);
             }
-            else if ((Methods)comboAlgorithm.SelectedItem == Methods.Backpropagation)
+            else if (selectedMethod == Methods.Backpropagation)
             {
                 teacher = new LevenbergMarquardtLearning(actNet);
                 ((LevenbergMarquardtLearning)teacher).LearningRate = double.Parse(txtbxLearningRate.Text);
@@ -229,7 +238,8 @@ namespace NeuralNetworksProject
 
         private void AlgorithmSelected(object sender, EventArgs e)
         {
-            switch ((Methods)this.comboAlgorithm.SelectedItem)
+            selectedMethod = (Methods) this.comboAlgorithm.SelectedItem;
+            switch (selectedMethod)
             {
                 case Methods.Backpropagation:
                     lblMomentum.Visible = true;
