@@ -112,17 +112,10 @@ namespace NeuralNetworksProject
             }
             else
             {
-                input = new double[dgviewLoadedData.RowCount][];
-                target = new double[dgviewLoadedData.RowCount][];
-                for (int i = 0; i < input.Length; i++)
-                {
-                    input[i] = dgviewLoadedData[0, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
-                    target[i] = dgviewLoadedData[1, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
-                }
                 if (!stopTraining)
                 {
-                    btnTrain.Text = "Train";
                     stopTraining = true;
+                    btnTrain.Text = "Train";
                     while (!workerThread.Join(100))
                     {
                         Application.DoEvents();
@@ -131,6 +124,13 @@ namespace NeuralNetworksProject
                 }
                 else
                 {
+                    input = new double[dgviewLoadedData.RowCount][];
+                    target = new double[dgviewLoadedData.RowCount][];
+                    for (int i = 0; i < input.Length; i++)
+                    {
+                        input[i] = dgviewLoadedData[0, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
+                        target[i] = dgviewLoadedData[1, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
+                    }
                     if (ShowTrainingInputDialog())
                     {
                         btnTrain.Text = "Stop";
