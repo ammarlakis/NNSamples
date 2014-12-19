@@ -120,8 +120,6 @@ namespace NeuralNetworksProject
                     input[i] = dgviewLoadedData[0, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
                     target[i] = dgviewLoadedData[1, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
                 }
-                MessageBox.Show(input[0][1].ToString());
-                MessageBox.Show(target[2][0].ToString());
                 if (!stopTraining)
                 {
                     btnTrain.Text = "Train";
