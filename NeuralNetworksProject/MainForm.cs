@@ -187,22 +187,30 @@ namespace NeuralNetworksProject
         }
         private void TestNetworkClick(object sender, EventArgs e)
         {
-            double[][] input = new double[4][];
-            input[0] = new double[]{0,0};
-            input[1] = new double[]{0,1};
-            input[2] = new double[]{1,0};
-            input[3] = new double[]{1,1};
-            double[][] output = new double[4][] {
-											 new double[] {0},
-											 new double[] {1},
-											 new double[] {1},
-											 new double[] {0}
-										 };
-
-            for (int i = 0; i < input.Length; i++)
+            if (this.actNet == null)
             {
-                actNet.Compute(input.GetRow(i));
-                MessageBox.Show(Math.Abs(output[i][0] - actNet.Output[0]).ToString());
+                MessageBox.Show("You have to set the network first");
+            }
+            else
+            {
+                double[][] input = new double[4][];
+                input[0] = new double[] {0, 0};
+                input[1] = new double[] {0, 1};
+                input[2] = new double[] {1, 0};
+                input[3] = new double[] {1, 1};
+                double[][] output = new double[4][]
+                {
+                    new double[] {0},
+                    new double[] {1},
+                    new double[] {1},
+                    new double[] {0}
+                };
+
+                for (int i = 0; i < input.Length; i++)
+                {
+                    actNet.Compute(input.GetRow(i));
+                    MessageBox.Show(Math.Abs(output[i][0] - actNet.Output[0]).ToString());
+                }
             }
         }
 
