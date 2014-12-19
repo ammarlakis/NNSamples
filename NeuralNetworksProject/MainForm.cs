@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Accord.IO;
 using Accord.Math;
+using Accord.Neuro.Learning;
 using AForge;
 using AForge.Neuro;
 using AForge.Neuro.Learning;
@@ -20,13 +21,18 @@ namespace NeuralNetworksProject
         private ActivationNetwork actNet;
         private DataTable dataTable;
         private ArrayList errors = new ArrayList();
-        private AForge.Controls.Chart chrtError;
         private bool stopTraining = true;
         private Thread workerThread = null;
+        private enum Methods
+        {
+            Backpropagation = 0, LevenbergMarquardt = 1
+        }
 
         public MainForm()
          {
             InitializeComponent();
+            this.comboAlgorithm.DataSource = Enum.GetValues(typeof(Methods));
+            this.comboAlgorithm.SelectedItem = 0;
             chrtError.AddDataSeries("error", Color.Red, AForge.Controls.Chart.SeriesType.Line, 1);
          }
 
@@ -117,10 +123,23 @@ namespace NeuralNetworksProject
         {
             stopTraining = false;
             ArrayList errorsList = new ArrayList();
-            BackPropagationLearning backPropagation = new BackPropagationLearning(actNet);
-            backPropagation.LearningRate = double.Parse(txtbxLearningRate.Text);
-            backPropagation.Momentum = double.Parse(txtbxMomentum.Text);
-            int iterations = 50;
+            ISupervisedLearning teacher;
+            if ((Methods)comboAlgorithm.SelectedItem == Methods.Backpropagation)
+            {
+                teacher = new BackPropagationLearning(actNet);
+                ((BackPropagationLearning)teacher).LearningRate = double.Parse(txtbxLearningRate.Text);
+                ((BackPropagationLearning)teacher).Momentum = double.Parse(txtbxMomentum.Text);
+            }
+            else if ((Methods)comboAlgorithm.SelectedItem == Methods.Backpropagation)
+            {
+                teacher = new LevenbergMarquardtLearning(actNet);
+                ((LevenbergMarquardtLearning)teacher).LearningRate = double.Parse(txtbxLearningRate.Text);
+            }
+            else
+            {
+                throw new Exception("No method is selected");
+            }
+            int iterations = 100;
             double errorLimit = 0.2;
             double[][] input = new double[4][] {
 											new double[] {0, 0},
@@ -136,7 +155,7 @@ namespace NeuralNetworksProject
 										 };
             while (!stopTraining)
             {
-                double error = backPropagation.RunEpoch(input, output);
+                double error = teacher.RunEpoch(input, output);
                 errorsList.Add(error);
                 if (stopTraining || ((error <= errorLimit) && (iterations == 0)))
                 {
@@ -179,6 +198,7 @@ namespace NeuralNetworksProject
             MessageBox.Show("Test");
         }
 
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if ((workerThread != null) && workerThread.IsAlive)
@@ -190,6 +210,22 @@ namespace NeuralNetworksProject
                 }
             }
         }
+
+        private void AlgorithmSelected(object sender, EventArgs e)
+        {
+            switch ((Methods)this.comboAlgorithm.SelectedItem)
+            {
+                case Methods.Backpropagation:
+                    lblMomentum.Visible = true;
+                    txtbxMomentum.Visible = true;
+                    break;
+                case Methods.LevenbergMarquardt:
+                    lblMomentum.Visible = false;
+                    txtbxMomentum.Visible = false;
+                    break;
+            }
+        }
+
     }
 }
 

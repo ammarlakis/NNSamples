@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace NeuralNetworksProject
 {
@@ -33,6 +34,8 @@ namespace NeuralNetworksProject
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
             this.pageBackPropagation = new System.Windows.Forms.TabPage();
+            this.lblAlgorithm = new System.Windows.Forms.Label();
+            this.comboAlgorithm = new System.Windows.Forms.ComboBox();
             this.txtbxMomentum = new System.Windows.Forms.TextBox();
             this.txtbxLearningRate = new System.Windows.Forms.TextBox();
             this.lblMomentum = new System.Windows.Forms.Label();
@@ -72,6 +75,8 @@ namespace NeuralNetworksProject
             // pageBackPropagation
             // 
             this.pageBackPropagation.BackColor = System.Drawing.Color.Transparent;
+            this.pageBackPropagation.Controls.Add(this.lblAlgorithm);
+            this.pageBackPropagation.Controls.Add(this.comboAlgorithm);
             this.pageBackPropagation.Controls.Add(this.txtbxMomentum);
             this.pageBackPropagation.Controls.Add(this.txtbxLearningRate);
             this.pageBackPropagation.Controls.Add(this.lblMomentum);
@@ -91,6 +96,25 @@ namespace NeuralNetworksProject
             this.pageBackPropagation.Size = new System.Drawing.Size(823, 450);
             this.pageBackPropagation.TabIndex = 0;
             this.pageBackPropagation.Text = "BackPropagation";
+            // 
+            // lblAlgorithm
+            // 
+            this.lblAlgorithm.AutoSize = true;
+            this.lblAlgorithm.Location = new System.Drawing.Point(556, 171);
+            this.lblAlgorithm.Name = "lblAlgorithm";
+            this.lblAlgorithm.Size = new System.Drawing.Size(97, 13);
+            this.lblAlgorithm.TabIndex = 12;
+            this.lblAlgorithm.Text = "Training Algorithm :";
+            // 
+            // comboAlgorithm
+            // 
+            this.comboAlgorithm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAlgorithm.FormattingEnabled = true;
+            this.comboAlgorithm.Location = new System.Drawing.Point(660, 169);
+            this.comboAlgorithm.Name = "comboAlgorithm";
+            this.comboAlgorithm.Size = new System.Drawing.Size(145, 21);
+            this.comboAlgorithm.TabIndex = 11;
+            this.comboAlgorithm.SelectedIndexChanged += new System.EventHandler(this.AlgorithmSelected);
             // 
             // txtbxMomentum
             // 
@@ -213,9 +237,9 @@ namespace NeuralNetworksProject
             // btnSetNetwork
             // 
             this.btnSetNetwork.Enabled = false;
-            this.btnSetNetwork.Location = new System.Drawing.Point(596, 166);
+            this.btnSetNetwork.Location = new System.Drawing.Point(455, 166);
             this.btnSetNetwork.Name = "btnSetNetwork";
-            this.btnSetNetwork.Size = new System.Drawing.Size(75, 23);
+            this.btnSetNetwork.Size = new System.Drawing.Size(95, 23);
             this.btnSetNetwork.TabIndex = 0;
             this.btnSetNetwork.Text = "Set Network";
             this.btnSetNetwork.UseVisualStyleBackColor = true;
@@ -307,6 +331,9 @@ namespace NeuralNetworksProject
         private System.Windows.Forms.OpenFileDialog ofdlgLoadData;
         private System.Windows.Forms.TextBox txtbxMomentum;
         private System.Windows.Forms.Label lblMomentum;
+        private System.Windows.Forms.Label lblAlgorithm;
+        private System.Windows.Forms.ComboBox comboAlgorithm;
+        private AForge.Controls.Chart chrtError;
     }
 }
 
