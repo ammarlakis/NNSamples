@@ -21,7 +21,6 @@ namespace NeuralNetworksProject
         private static Collection<UserControl>  layersControls = new Collection<UserControl>();
         private ActivationNetwork actNet;
         private DataTable dataTable;
-        private ArrayList errors = new ArrayList();
         private bool stopTraining = true;
         private Thread workerThread;
         private int epoches;
