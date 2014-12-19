@@ -94,7 +94,6 @@ namespace NeuralNetworksProject
                 {
                     dataTable = new ExcelReader(ofdlgLoadData.OpenFile(),true,false).GetWorksheet("data");
                     dataTable.Columns[0].ColumnName = "Input";
-
                     dataTable.Columns[1].ColumnName = "Output";
                     dgviewLoadedData.DataSource = dataTable;
                 }
