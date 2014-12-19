@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Accord.IO;
@@ -25,6 +26,8 @@ namespace NeuralNetworksProject
         private Thread workerThread = null;
         private int epoches;
         private double errorLimit;
+        private double[][] input;
+        private double[][] target;
         private enum Methods
         {
             Backpropagation = 0, LevenbergMarquardt = 1
@@ -84,7 +87,7 @@ namespace NeuralNetworksProject
 
         private void LoadDataClick(object sender, EventArgs e)
         {
-            ofdlgLoadData.InitialDirectory = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            ofdlgLoadData.InitialDirectory = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)) + "Documents";
             if (ofdlgLoadData.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -109,6 +112,7 @@ namespace NeuralNetworksProject
             }
             else
             {
+                
                 if (!stopTraining)
                 {
                     btnTrain.Text = "Train";
@@ -128,7 +132,7 @@ namespace NeuralNetworksProject
             }
         }
 
-        private void Train(double[][] input, double[][] target)
+        private void Train()
         {
             ShowTrainingInputDialog();
             stopTraining = false;
