@@ -23,6 +23,8 @@ namespace NeuralNetworksProject
         private ArrayList errors = new ArrayList();
         private bool stopTraining = true;
         private Thread workerThread = null;
+        private int epoches;
+        private double errorLimit;
         private enum Methods
         {
             Backpropagation = 0, LevenbergMarquardt = 1
@@ -101,26 +103,34 @@ namespace NeuralNetworksProject
 
         private void TrainNetrworkClick(object sender, EventArgs e)
         {
-            if (!stopTraining)
+            if (this.actNet == null)
             {
-                btnTrain.Text = "Train";
-                stopTraining = true;
-                while (!workerThread.Join(100))
-                {
-                    Application.DoEvents();
-                    workerThread = null;
-                }
+                MessageBox.Show("You have to set the network first");
             }
             else
             {
-                btnTrain.Text = "Stop";
-                workerThread = new Thread(new ThreadStart(Train));
-                workerThread.Start();
+                if (!stopTraining)
+                {
+                    btnTrain.Text = "Train";
+                    stopTraining = true;
+                    while (!workerThread.Join(100))
+                    {
+                        Application.DoEvents();
+                        workerThread = null;
+                    }
+                }
+                else
+                {
+                    btnTrain.Text = "Stop";
+                    workerThread = new Thread(new ThreadStart(Train));
+                    workerThread.Start();
+                }
             }
         }
 
         private void Train()
         {
+            ShowTrainingInputDialog();
             stopTraining = false;
             ArrayList errorsList = new ArrayList();
             ISupervisedLearning teacher;
@@ -139,29 +149,28 @@ namespace NeuralNetworksProject
             {
                 throw new Exception("No method is selected");
             }
-            int iterations = 100;
-            double errorLimit = 0.2;
+            
             double[][] input = new double[4][] {
-											new double[] {0, 0},
-											new double[] {0, 1},
-											new double[] {1, 0},
-											new double[] {1, 1}
-										};
+                                            new double[] {0, 0},
+                                            new double[] {0, 1},
+                                            new double[] {1, 0},
+                                            new double[] {1, 1}
+                                        };
             double[][] output = new double[4][] {
-											 new double[] {0},
-											 new double[] {1},
-											 new double[] {1},
-											 new double[] {0}
-										 };
+                                             new double[] {0},
+                                             new double[] {1},
+                                             new double[] {1},
+                                             new double[] {0}
+                                         };
             while (!stopTraining)
             {
                 double error = teacher.RunEpoch(input, output);
                 errorsList.Add(error);
-                if (stopTraining || ((error <= errorLimit) && (iterations == 0)))
+                if (stopTraining || ((error <= errorLimit) && (epoches == 0)))
                 {
                     break;
                 }
-                iterations--;
+                epoches--;
             }
             double[,] errors = new double[errorsList.Count, 2];
             for (int i = 0, n = errorsList.Count; i < n; i++)
@@ -225,7 +234,16 @@ namespace NeuralNetworksProject
                     break;
             }
         }
-
+        public void ShowTrainingInputDialog()
+        {
+            TrainingInputDialog inputDialog = new TrainingInputDialog();
+            if (inputDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                this.epoches = int.Parse(inputDialog.txtbxEpoches.Text);
+                this.errorLimit = double.Parse(inputDialog.txtbxErrorLimit.Text);
+            }
+            inputDialog.Dispose();
+        }
     }
 }
 
