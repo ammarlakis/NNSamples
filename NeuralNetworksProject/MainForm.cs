@@ -23,7 +23,7 @@ namespace NeuralNetworksProject
         private DataTable dataTable;
         private ArrayList errors = new ArrayList();
         private bool stopTraining = true;
-        private Thread workerThread = null;
+        private Thread workerThread;
         private int epoches;
         private double errorLimit;
         private double[][] input;
@@ -162,19 +162,6 @@ namespace NeuralNetworksProject
             {
                 throw new Exception("No method is selected");
             }
-            
-            //double[][] input = new double[4][] {
-            //                                new double[] {0, 0},
-            //                                new double[] {0, 1},
-            //                                new double[] {1, 0},
-            //                                new double[] {1, 1}
-            //                            };
-            //double[][] output = new double[4][] {
-            //                                 new double[] {0},
-            //                                 new double[] {1},
-            //                                 new double[] {1},
-            //                                 new double[] {0}
-            //                             };
             while (!stopTraining)
             {
                 double error = teacher.RunEpoch(input, target);
