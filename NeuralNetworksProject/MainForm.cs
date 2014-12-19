@@ -128,7 +128,7 @@ namespace NeuralNetworksProject
             }
         }
 
-        private void Train()
+        private void Train(double[][] input, double[][] target)
         {
             ShowTrainingInputDialog();
             stopTraining = false;
@@ -150,21 +150,21 @@ namespace NeuralNetworksProject
                 throw new Exception("No method is selected");
             }
             
-            double[][] input = new double[4][] {
-                                            new double[] {0, 0},
-                                            new double[] {0, 1},
-                                            new double[] {1, 0},
-                                            new double[] {1, 1}
-                                        };
-            double[][] output = new double[4][] {
-                                             new double[] {0},
-                                             new double[] {1},
-                                             new double[] {1},
-                                             new double[] {0}
-                                         };
+            //double[][] input = new double[4][] {
+            //                                new double[] {0, 0},
+            //                                new double[] {0, 1},
+            //                                new double[] {1, 0},
+            //                                new double[] {1, 1}
+            //                            };
+            //double[][] output = new double[4][] {
+            //                                 new double[] {0},
+            //                                 new double[] {1},
+            //                                 new double[] {1},
+            //                                 new double[] {0}
+            //                             };
             while (!stopTraining)
             {
-                double error = teacher.RunEpoch(input, output);
+                double error = teacher.RunEpoch(input, target);
                 errorsList.Add(error);
                 if (stopTraining || ((error <= errorLimit) && (epoches == 0)))
                 {
@@ -202,13 +202,8 @@ namespace NeuralNetworksProject
             }
         }
 
-        private void dgviewLoadedData_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            MessageBox.Show("Test");
-        }
 
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void ProgramClosing(object sender, FormClosingEventArgs e)
         {
             if ((workerThread != null) && workerThread.IsAlive)
             {

@@ -184,7 +184,6 @@ namespace NeuralNetworksProject
             this.dgviewLoadedData.ShowEditingIcon = false;
             this.dgviewLoadedData.Size = new System.Drawing.Size(359, 220);
             this.dgviewLoadedData.TabIndex = 8;
-            this.dgviewLoadedData.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgviewLoadedData_CellEndEdit);
             // 
             // gboxNetTopology
             // 
@@ -299,7 +298,7 @@ namespace NeuralNetworksProject
             this.Controls.Add(this.tabCtrlMain);
             this.Name = "MainForm";
             this.Text = "Neural Network Examples";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProgramClosing);
             this.tabCtrlMain.ResumeLayout(false);
             this.pageBackPropagation.ResumeLayout(false);
             this.pageBackPropagation.PerformLayout();
