@@ -134,10 +134,12 @@ namespace NeuralNetworksProject
                 }
                 else
                 {
-                    ShowTrainingInputDialog();
-                    btnTrain.Text = "Stop";
-                    workerThread = new Thread(new ThreadStart(Train));
-                    workerThread.Start();
+                    if (ShowTrainingInputDialog())
+                    {
+                        btnTrain.Text = "Stop";
+                        workerThread = new Thread(new ThreadStart(Train));
+                        workerThread.Start();
+                    }
                 }
             }
         }
@@ -251,15 +253,18 @@ namespace NeuralNetworksProject
                     break;
             }
         }
-        public void ShowTrainingInputDialog()
+        public bool ShowTrainingInputDialog()
         {
             TrainingInputDialog inputDialog = new TrainingInputDialog();
             if (inputDialog.ShowDialog(this) == DialogResult.OK)
             {
                 this.epoches = int.Parse(inputDialog.txtbxEpoches.Text);
                 this.errorLimit = double.Parse(inputDialog.txtbxErrorLimit.Text);
+                inputDialog.Dispose();
+                return true;
             }
             inputDialog.Dispose();
+            return false;
         }
     }
 }
