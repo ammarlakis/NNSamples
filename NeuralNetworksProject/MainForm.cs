@@ -92,8 +92,9 @@ namespace NeuralNetworksProject
             {
                 try
                 {
-                    MessageBox.Show(ofdlgLoadData.FileName);
-                    dataTable = new ExcelReader(ofdlgLoadData.OpenFile()).GetWorksheet("data");
+                    dataTable = new ExcelReader(ofdlgLoadData.OpenFile(),true,false).GetWorksheet("data");
+                    dataTable.Columns[0].ColumnName = "Input";
+                    dataTable.Columns[1].ColumnName = "Output";
                     dgviewLoadedData.DataSource = dataTable;
                 }
                 catch (Exception exception)
@@ -101,7 +102,6 @@ namespace NeuralNetworksProject
                     MessageBox.Show("Couldn't get data!\n" + exception.Message);
                 }
             }
-            
         }
 
         private void TrainNetrworkClick(object sender, EventArgs e)
