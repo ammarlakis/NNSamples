@@ -31,9 +31,9 @@ namespace NeuralNetworksProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
             this.tabpgUnsupervisedLearning = new System.Windows.Forms.TabPage();
             this.tabpgSupervisedLearning = new System.Windows.Forms.TabPage();
@@ -49,19 +49,20 @@ namespace NeuralNetworksProject
             this.gboxNetTopology = new System.Windows.Forms.GroupBox();
             this.pnlNetTopology = new System.Windows.Forms.Panel();
             this.pnlChart = new System.Windows.Forms.Panel();
+            this.lblTrainingProcess = new System.Windows.Forms.Label();
+            this.progbarTrainingProcess = new System.Windows.Forms.ProgressBar();
+            this.chrtError = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnSetNetwork = new System.Windows.Forms.Button();
             this.btnTrain = new System.Windows.Forms.Button();
             this.btnLoadData = new System.Windows.Forms.Button();
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
-            this.chrtError = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.progbarTrainingProcess = new System.Windows.Forms.ProgressBar();
             this.tabpgSupervisedLearning.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).BeginInit();
             this.gboxNetTopology.SuspendLayout();
             this.pnlChart.SuspendLayout();
-            this.tabCtrlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrtError)).BeginInit();
+            this.tabCtrlMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // ofdlgLoadData
@@ -214,12 +215,48 @@ namespace NeuralNetworksProject
             // 
             // pnlChart
             // 
+            this.pnlChart.Controls.Add(this.lblTrainingProcess);
             this.pnlChart.Controls.Add(this.progbarTrainingProcess);
             this.pnlChart.Controls.Add(this.chrtError);
             this.pnlChart.Location = new System.Drawing.Point(3, 6);
             this.pnlChart.Name = "pnlChart";
             this.pnlChart.Size = new System.Drawing.Size(446, 438);
             this.pnlChart.TabIndex = 5;
+            // 
+            // lblTrainingProcess
+            // 
+            this.lblTrainingProcess.AutoSize = true;
+            this.lblTrainingProcess.BackColor = System.Drawing.Color.White;
+            this.lblTrainingProcess.Location = new System.Drawing.Point(199, 417);
+            this.lblTrainingProcess.Name = "lblTrainingProcess";
+            this.lblTrainingProcess.Size = new System.Drawing.Size(0, 13);
+            this.lblTrainingProcess.TabIndex = 2;
+            // 
+            // progbarTrainingProcess
+            // 
+            this.progbarTrainingProcess.Location = new System.Drawing.Point(3, 412);
+            this.progbarTrainingProcess.Name = "progbarTrainingProcess";
+            this.progbarTrainingProcess.Size = new System.Drawing.Size(440, 23);
+            this.progbarTrainingProcess.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progbarTrainingProcess.TabIndex = 1;
+            // 
+            // chrtError
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chrtError.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chrtError.Legends.Add(legend2);
+            this.chrtError.Location = new System.Drawing.Point(3, 3);
+            this.chrtError.Name = "chrtError";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.IsXValueIndexed = true;
+            series2.Legend = "Legend1";
+            series2.Name = "Error";
+            this.chrtError.Series.Add(series2);
+            this.chrtError.Size = new System.Drawing.Size(440, 403);
+            this.chrtError.TabIndex = 0;
+            this.chrtError.Text = "ErrorFunction";
             // 
             // btnTest
             // 
@@ -272,33 +309,6 @@ namespace NeuralNetworksProject
             this.tabCtrlMain.Size = new System.Drawing.Size(831, 476);
             this.tabCtrlMain.TabIndex = 0;
             // 
-            // chrtError
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chrtError.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chrtError.Legends.Add(legend1);
-            this.chrtError.Location = new System.Drawing.Point(3, 3);
-            this.chrtError.Name = "chrtError";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Error";
-            this.chrtError.Series.Add(series1);
-            this.chrtError.Size = new System.Drawing.Size(440, 403);
-            this.chrtError.TabIndex = 0;
-            this.chrtError.Text = "ErrorFunction";
-            // 
-            // progbarTrainingProcess
-            // 
-            this.progbarTrainingProcess.Location = new System.Drawing.Point(3, 412);
-            this.progbarTrainingProcess.Name = "progbarTrainingProcess";
-            this.progbarTrainingProcess.Size = new System.Drawing.Size(440, 23);
-            this.progbarTrainingProcess.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progbarTrainingProcess.TabIndex = 1;
-            this.progbarTrainingProcess.Value = 30;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,8 +323,9 @@ namespace NeuralNetworksProject
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).EndInit();
             this.gboxNetTopology.ResumeLayout(false);
             this.pnlChart.ResumeLayout(false);
-            this.tabCtrlMain.ResumeLayout(false);
+            this.pnlChart.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrtError)).EndInit();
+            this.tabCtrlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -343,6 +354,7 @@ namespace NeuralNetworksProject
         private System.Windows.Forms.TabControl tabCtrlMain;
         private System.Windows.Forms.ProgressBar progbarTrainingProcess;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrtError;
+        private System.Windows.Forms.Label lblTrainingProcess;
     }
 }
 

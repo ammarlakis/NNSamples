@@ -38,7 +38,7 @@ namespace NeuralNetworksProject
             InitializeComponent();
             this.comboAlgorithm.DataSource = Enum.GetValues(typeof(Methods));
             this.comboAlgorithm.SelectedItem = 0;
-            chrtError.AddDataSeries("error", Color.Red, AForge.Controls.Chart.SeriesType.Line, 1);
+            //chrtError.AddDataSeries("error", Color.Red, AForge.Controls.Chart.SeriesType.Line, 1);
          }
 
         private void AddLayerClick(object sender, EventArgs e)
@@ -161,20 +161,30 @@ namespace NeuralNetworksProject
             {
                 throw new Exception("No method is selected");
             }
+            int iterations = epoches;
+            int percentage;
             while (!stopTraining)
             {
                 double error = teacher.RunEpoch(input, target);
                 errorsList.Add(error);
-                if (stopTraining || (error <= errorLimit) || (epoches == 0))
+                if (stopTraining || (error <= errorLimit) || (iterations == 0))
                 {
                     break;
                 }
-                epoches--;
+                this.Invoke((MethodInvoker)delegate
+                {
+                    percentage = (int) Math.Round((double) (100*(epoches - iterations))/epoches);
+                    this.progbarTrainingProcess.Value = percentage;
+                    this.lblTrainingProcess.Text = "Training (" + percentage + " %" + ")";
+                });
+                iterations--;
             }
             stopTraining = true;
             this.Invoke((MethodInvoker) delegate
             {
                 this.btnTrain.Text = "Train";
+                this.progbarTrainingProcess.Value = 100;
+                this.lblTrainingProcess.Text = "Done (100 %)";
             });
             if (errorsList.Count < 2)
             {
@@ -188,8 +198,8 @@ namespace NeuralNetworksProject
                     errors[i, 0] = i;
                     errors[i, 1] = (double)errorsList[i];
                 }
-                chrtError.RangeX = new Range(0, errorsList.Count - 1);
-                chrtError.UpdateDataSeries("error", errors);
+                //chrtError.RangeX = new Range(0, errorsList.Count - 1);
+                //chrtError.UpdateDataSeries("error", errors);
             }
         }
         private void TestNetworkClick(object sender, EventArgs e)
