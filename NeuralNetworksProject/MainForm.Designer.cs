@@ -31,9 +31,9 @@ namespace NeuralNetworksProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
             this.tabpgUnsupervisedLearning = new System.Windows.Forms.TabPage();
             this.tabpgSupervisedLearning = new System.Windows.Forms.TabPage();
@@ -193,6 +193,7 @@ namespace NeuralNetworksProject
             this.dgviewLoadedData.ShowEditingIcon = false;
             this.dgviewLoadedData.Size = new System.Drawing.Size(359, 220);
             this.dgviewLoadedData.TabIndex = 8;
+            this.dgviewLoadedData.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataCellEndEdit);
             // 
             // gboxNetTopology
             // 
@@ -242,17 +243,17 @@ namespace NeuralNetworksProject
             // 
             // chrtError
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chrtError.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chrtError.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chrtError.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chrtError.Legends.Add(legend1);
             this.chrtError.Location = new System.Drawing.Point(3, 3);
             this.chrtError.Name = "chrtError";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.Name = "Error";
-            this.chrtError.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Error";
+            this.chrtError.Series.Add(series1);
             this.chrtError.Size = new System.Drawing.Size(440, 403);
             this.chrtError.TabIndex = 0;
             this.chrtError.Text = "ErrorFunction";

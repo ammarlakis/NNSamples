@@ -192,7 +192,8 @@ namespace NeuralNetworksProject
             }
             else
             {
-                dgviewLoadedData.Columns.Add("Output","Output");
+                dgviewLoadedData.Columns.Add("Output " + (dgviewLoadedData.ColumnCount - 1),
+                    "Output " + (dgviewLoadedData.ColumnCount - 1));
                 for (int i = 0; i < input.Length; i++)
                 {
                     double[] output = actNet.Compute(input.GetRow(i));
@@ -203,7 +204,7 @@ namespace NeuralNetworksProject
                     }
                     DataGridViewCell cell = new DataGridViewTextBoxCell();
                     cell.Value = outputs;
-                    dgviewLoadedData["Output", i] = cell;
+                    dgviewLoadedData["Output " + (dgviewLoadedData.ColumnCount - 2), i] = cell;
                 }
             }
         }
@@ -248,6 +249,15 @@ namespace NeuralNetworksProject
             }
             inputDialog.Dispose();
             return false;
+        }
+
+        private void DataCellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                input[i] = dgviewLoadedData[0, i].Value.ToString().Split(',').Select(double.Parse).ToArray();
+                target[i] = dgviewLoadedData[1, i].Value.ToString().Split(',').Select(double.Parse).ToArray();
+            }
         }
     }
 }
