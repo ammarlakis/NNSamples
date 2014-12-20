@@ -31,9 +31,9 @@ namespace NeuralNetworksProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
             this.tabpgUnsupervisedLearning = new System.Windows.Forms.TabPage();
             this.tabpgSupervisedLearning = new System.Windows.Forms.TabPage();
@@ -112,7 +112,7 @@ namespace NeuralNetworksProject
             this.lblAlgorithm.Location = new System.Drawing.Point(556, 171);
             this.lblAlgorithm.Name = "lblAlgorithm";
             this.lblAlgorithm.Size = new System.Drawing.Size(97, 13);
-            this.lblAlgorithm.TabIndex = 12;
+            this.lblAlgorithm.TabIndex = 0;
             this.lblAlgorithm.Text = "Training Algorithm :";
             // 
             // comboAlgorithm
@@ -122,7 +122,7 @@ namespace NeuralNetworksProject
             this.comboAlgorithm.Location = new System.Drawing.Point(660, 169);
             this.comboAlgorithm.Name = "comboAlgorithm";
             this.comboAlgorithm.Size = new System.Drawing.Size(145, 21);
-            this.comboAlgorithm.TabIndex = 11;
+            this.comboAlgorithm.TabIndex = 6;
             this.comboAlgorithm.SelectedIndexChanged += new System.EventHandler(this.AlgorithmSelected);
             // 
             // txtbxMomentum
@@ -130,7 +130,7 @@ namespace NeuralNetworksProject
             this.txtbxMomentum.Location = new System.Drawing.Point(768, 133);
             this.txtbxMomentum.Name = "txtbxMomentum";
             this.txtbxMomentum.Size = new System.Drawing.Size(37, 20);
-            this.txtbxMomentum.TabIndex = 10;
+            this.txtbxMomentum.TabIndex = 5;
             this.txtbxMomentum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
             // 
             // txtbxLearningRate
@@ -138,7 +138,7 @@ namespace NeuralNetworksProject
             this.txtbxLearningRate.Location = new System.Drawing.Point(689, 133);
             this.txtbxLearningRate.Name = "txtbxLearningRate";
             this.txtbxLearningRate.Size = new System.Drawing.Size(37, 20);
-            this.txtbxLearningRate.TabIndex = 10;
+            this.txtbxLearningRate.TabIndex = 4;
             this.txtbxLearningRate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
             // 
             // lblMomentum
@@ -146,7 +146,7 @@ namespace NeuralNetworksProject
             this.lblMomentum.Location = new System.Drawing.Point(736, 136);
             this.lblMomentum.Name = "lblMomentum";
             this.lblMomentum.Size = new System.Drawing.Size(26, 18);
-            this.lblMomentum.TabIndex = 9;
+            this.lblMomentum.TabIndex = 0;
             this.lblMomentum.Text = "μ = ";
             // 
             // lblLearningRate
@@ -154,7 +154,7 @@ namespace NeuralNetworksProject
             this.lblLearningRate.Location = new System.Drawing.Point(657, 136);
             this.lblLearningRate.Name = "lblLearningRate";
             this.lblLearningRate.Size = new System.Drawing.Size(26, 18);
-            this.lblLearningRate.TabIndex = 9;
+            this.lblLearningRate.TabIndex = 0;
             this.lblLearningRate.Text = "α = ";
             // 
             // btnAddLayer
@@ -162,7 +162,7 @@ namespace NeuralNetworksProject
             this.btnAddLayer.Location = new System.Drawing.Point(455, 131);
             this.btnAddLayer.Name = "btnAddLayer";
             this.btnAddLayer.Size = new System.Drawing.Size(95, 23);
-            this.btnAddLayer.TabIndex = 6;
+            this.btnAddLayer.TabIndex = 2;
             this.btnAddLayer.Text = "Add Layer";
             this.btnAddLayer.UseVisualStyleBackColor = true;
             this.btnAddLayer.Click += new System.EventHandler(this.AddLayerClick);
@@ -173,7 +173,7 @@ namespace NeuralNetworksProject
             this.btnRemoveLayer.Location = new System.Drawing.Point(556, 131);
             this.btnRemoveLayer.Name = "btnRemoveLayer";
             this.btnRemoveLayer.Size = new System.Drawing.Size(95, 23);
-            this.btnRemoveLayer.TabIndex = 7;
+            this.btnRemoveLayer.TabIndex = 3;
             this.btnRemoveLayer.Text = "Remove Layer";
             this.btnRemoveLayer.UseVisualStyleBackColor = true;
             this.btnRemoveLayer.Click += new System.EventHandler(this.RemoveLayerClick);
@@ -200,7 +200,7 @@ namespace NeuralNetworksProject
             this.gboxNetTopology.Location = new System.Drawing.Point(455, 6);
             this.gboxNetTopology.Name = "gboxNetTopology";
             this.gboxNetTopology.Size = new System.Drawing.Size(362, 122);
-            this.gboxNetTopology.TabIndex = 7;
+            this.gboxNetTopology.TabIndex = 0;
             this.gboxNetTopology.TabStop = false;
             this.gboxNetTopology.Text = "Network Topology";
             // 
@@ -221,7 +221,7 @@ namespace NeuralNetworksProject
             this.pnlChart.Location = new System.Drawing.Point(3, 6);
             this.pnlChart.Name = "pnlChart";
             this.pnlChart.Size = new System.Drawing.Size(446, 438);
-            this.pnlChart.TabIndex = 5;
+            this.pnlChart.TabIndex = 100;
             // 
             // lblTrainingProcess
             // 
@@ -238,21 +238,21 @@ namespace NeuralNetworksProject
             this.progbarTrainingProcess.Name = "progbarTrainingProcess";
             this.progbarTrainingProcess.Size = new System.Drawing.Size(440, 23);
             this.progbarTrainingProcess.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progbarTrainingProcess.TabIndex = 1;
+            this.progbarTrainingProcess.TabIndex = 0;
             // 
             // chrtError
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chrtError.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chrtError.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chrtError.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chrtError.Legends.Add(legend4);
             this.chrtError.Location = new System.Drawing.Point(3, 3);
             this.chrtError.Name = "chrtError";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Error";
-            this.chrtError.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "Error";
+            this.chrtError.Series.Add(series4);
             this.chrtError.Size = new System.Drawing.Size(440, 403);
             this.chrtError.TabIndex = 0;
             this.chrtError.Text = "ErrorFunction";
@@ -262,7 +262,7 @@ namespace NeuralNetworksProject
             this.btnTest.Location = new System.Drawing.Point(739, 421);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 4;
+            this.btnTest.TabIndex = 11;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.TestNetworkClick);
@@ -273,7 +273,7 @@ namespace NeuralNetworksProject
             this.btnSetNetwork.Location = new System.Drawing.Point(455, 166);
             this.btnSetNetwork.Name = "btnSetNetwork";
             this.btnSetNetwork.Size = new System.Drawing.Size(95, 23);
-            this.btnSetNetwork.TabIndex = 0;
+            this.btnSetNetwork.TabIndex = 7;
             this.btnSetNetwork.Text = "Set Network";
             this.btnSetNetwork.UseVisualStyleBackColor = true;
             this.btnSetNetwork.Click += new System.EventHandler(this.SetNetworkClick);
@@ -283,7 +283,7 @@ namespace NeuralNetworksProject
             this.btnTrain.Location = new System.Drawing.Point(596, 421);
             this.btnTrain.Name = "btnTrain";
             this.btnTrain.Size = new System.Drawing.Size(75, 23);
-            this.btnTrain.TabIndex = 2;
+            this.btnTrain.TabIndex = 10;
             this.btnTrain.Text = "Train";
             this.btnTrain.UseVisualStyleBackColor = true;
             this.btnTrain.Click += new System.EventHandler(this.TrainNetrworkClick);
@@ -293,7 +293,7 @@ namespace NeuralNetworksProject
             this.btnLoadData.Location = new System.Drawing.Point(455, 421);
             this.btnLoadData.Name = "btnLoadData";
             this.btnLoadData.Size = new System.Drawing.Size(75, 23);
-            this.btnLoadData.TabIndex = 1;
+            this.btnLoadData.TabIndex = 9;
             this.btnLoadData.Text = "Load Data";
             this.btnLoadData.UseVisualStyleBackColor = true;
             this.btnLoadData.Click += new System.EventHandler(this.LoadDataClick);
