@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using Accord.IO;
 using Accord.Math;
 using Accord.Neuro.Learning;
@@ -119,6 +120,7 @@ namespace NeuralNetworksProject
                 }
                 else
                 {
+                    this.chrtError.Series["Error"].Points.Clear();
                     input = new double[dgviewLoadedData.RowCount][];
                     target = new double[dgviewLoadedData.RowCount][];
                     for (int i = 0; i < input.Length; i++)
@@ -161,7 +163,6 @@ namespace NeuralNetworksProject
             while (!stopTraining)
             {
                 double error = teacher.RunEpoch(input, target);
-                errorsList.Add(error);
                 if (stopTraining || (error <= errorLimit) || (iterations == 0))
                 {
                     break;
@@ -171,6 +172,7 @@ namespace NeuralNetworksProject
                     percentage = (int) Math.Round((double) (100*(epoches - iterations))/epoches);
                     this.progbarTrainingProcess.Value = percentage;
                     this.lblTrainingProcess.Text = "Training (" + percentage + " %" + ")";
+                    chrtError.Series["Error"].Points.Add(new DataPoint(epoches - iterations, error));
                 });
                 iterations--;
             }
@@ -181,21 +183,6 @@ namespace NeuralNetworksProject
                 this.progbarTrainingProcess.Value = 100;
                 this.lblTrainingProcess.Text = "Done (100 %)";
             });
-            if (errorsList.Count < 2)
-            {
-                MessageBox.Show("Neural network already optimized for minimum error output");
-            }
-            else
-            {
-                double[,] errors = new double[errorsList.Count, 2];
-                for (int i = 0, n = errorsList.Count; i < n; i++)
-                {
-                    errors[i, 0] = i;
-                    errors[i, 1] = (double)errorsList[i];
-                }
-                //chrtError.RangeX = new Range(0, errorsList.Count - 1);
-                //chrtError.UpdateDataSeries("error", errors);
-            }
         }
         private void TestNetworkClick(object sender, EventArgs e)
         {
