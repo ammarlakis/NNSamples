@@ -31,33 +31,37 @@ namespace NeuralNetworksProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
             this.tabpgUnsupervisedLearning = new System.Windows.Forms.TabPage();
             this.tabpgSupervisedLearning = new System.Windows.Forms.TabPage();
-            this.btnLoadData = new System.Windows.Forms.Button();
-            this.btnTrain = new System.Windows.Forms.Button();
-            this.btnSetNetwork = new System.Windows.Forms.Button();
-            this.btnTest = new System.Windows.Forms.Button();
-            this.pnlChart = new System.Windows.Forms.Panel();
-            this.chrtError = new AForge.Controls.Chart();
+            this.lblAlgorithm = new System.Windows.Forms.Label();
+            this.comboAlgorithm = new System.Windows.Forms.ComboBox();
+            this.txtbxMomentum = new System.Windows.Forms.TextBox();
+            this.txtbxLearningRate = new System.Windows.Forms.TextBox();
+            this.lblMomentum = new System.Windows.Forms.Label();
+            this.lblLearningRate = new System.Windows.Forms.Label();
+            this.btnAddLayer = new System.Windows.Forms.Button();
+            this.btnRemoveLayer = new System.Windows.Forms.Button();
+            this.dgviewLoadedData = new System.Windows.Forms.DataGridView();
             this.gboxNetTopology = new System.Windows.Forms.GroupBox();
             this.pnlNetTopology = new System.Windows.Forms.Panel();
-            this.dgviewLoadedData = new System.Windows.Forms.DataGridView();
-            this.btnRemoveLayer = new System.Windows.Forms.Button();
-            this.btnAddLayer = new System.Windows.Forms.Button();
-            this.lblLearningRate = new System.Windows.Forms.Label();
-            this.lblMomentum = new System.Windows.Forms.Label();
-            this.txtbxLearningRate = new System.Windows.Forms.TextBox();
-            this.txtbxMomentum = new System.Windows.Forms.TextBox();
-            this.comboAlgorithm = new System.Windows.Forms.ComboBox();
-            this.lblAlgorithm = new System.Windows.Forms.Label();
+            this.pnlChart = new System.Windows.Forms.Panel();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.btnSetNetwork = new System.Windows.Forms.Button();
+            this.btnTrain = new System.Windows.Forms.Button();
+            this.btnLoadData = new System.Windows.Forms.Button();
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
+            this.chrtError = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.progbarTrainingProcess = new System.Windows.Forms.ProgressBar();
             this.tabpgSupervisedLearning.SuspendLayout();
-            this.pnlChart.SuspendLayout();
-            this.gboxNetTopology.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).BeginInit();
+            this.gboxNetTopology.SuspendLayout();
+            this.pnlChart.SuspendLayout();
             this.tabCtrlMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chrtError)).BeginInit();
             this.SuspendLayout();
             // 
             // ofdlgLoadData
@@ -101,65 +105,93 @@ namespace NeuralNetworksProject
             this.tabpgSupervisedLearning.TabIndex = 0;
             this.tabpgSupervisedLearning.Text = "Supervised Learning";
             // 
-            // btnLoadData
+            // lblAlgorithm
             // 
-            this.btnLoadData.Location = new System.Drawing.Point(455, 421);
-            this.btnLoadData.Name = "btnLoadData";
-            this.btnLoadData.Size = new System.Drawing.Size(75, 23);
-            this.btnLoadData.TabIndex = 1;
-            this.btnLoadData.Text = "Load Data";
-            this.btnLoadData.UseVisualStyleBackColor = true;
-            this.btnLoadData.Click += new System.EventHandler(this.LoadDataClick);
+            this.lblAlgorithm.AutoSize = true;
+            this.lblAlgorithm.Location = new System.Drawing.Point(556, 171);
+            this.lblAlgorithm.Name = "lblAlgorithm";
+            this.lblAlgorithm.Size = new System.Drawing.Size(97, 13);
+            this.lblAlgorithm.TabIndex = 12;
+            this.lblAlgorithm.Text = "Training Algorithm :";
             // 
-            // btnTrain
+            // comboAlgorithm
             // 
-            this.btnTrain.Location = new System.Drawing.Point(596, 421);
-            this.btnTrain.Name = "btnTrain";
-            this.btnTrain.Size = new System.Drawing.Size(75, 23);
-            this.btnTrain.TabIndex = 2;
-            this.btnTrain.Text = "Train";
-            this.btnTrain.UseVisualStyleBackColor = true;
-            this.btnTrain.Click += new System.EventHandler(this.TrainNetrworkClick);
+            this.comboAlgorithm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAlgorithm.FormattingEnabled = true;
+            this.comboAlgorithm.Location = new System.Drawing.Point(660, 169);
+            this.comboAlgorithm.Name = "comboAlgorithm";
+            this.comboAlgorithm.Size = new System.Drawing.Size(145, 21);
+            this.comboAlgorithm.TabIndex = 11;
+            this.comboAlgorithm.SelectedIndexChanged += new System.EventHandler(this.AlgorithmSelected);
             // 
-            // btnSetNetwork
+            // txtbxMomentum
             // 
-            this.btnSetNetwork.Enabled = false;
-            this.btnSetNetwork.Location = new System.Drawing.Point(455, 166);
-            this.btnSetNetwork.Name = "btnSetNetwork";
-            this.btnSetNetwork.Size = new System.Drawing.Size(95, 23);
-            this.btnSetNetwork.TabIndex = 0;
-            this.btnSetNetwork.Text = "Set Network";
-            this.btnSetNetwork.UseVisualStyleBackColor = true;
-            this.btnSetNetwork.Click += new System.EventHandler(this.SetNetworkClick);
+            this.txtbxMomentum.Location = new System.Drawing.Point(768, 133);
+            this.txtbxMomentum.Name = "txtbxMomentum";
+            this.txtbxMomentum.Size = new System.Drawing.Size(37, 20);
+            this.txtbxMomentum.TabIndex = 10;
+            this.txtbxMomentum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
             // 
-            // btnTest
+            // txtbxLearningRate
             // 
-            this.btnTest.Location = new System.Drawing.Point(739, 421);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 4;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.TestNetworkClick);
+            this.txtbxLearningRate.Location = new System.Drawing.Point(689, 133);
+            this.txtbxLearningRate.Name = "txtbxLearningRate";
+            this.txtbxLearningRate.Size = new System.Drawing.Size(37, 20);
+            this.txtbxLearningRate.TabIndex = 10;
+            this.txtbxLearningRate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
             // 
-            // pnlChart
+            // lblMomentum
             // 
-            this.pnlChart.Controls.Add(this.chrtError);
-            this.pnlChart.Location = new System.Drawing.Point(3, 6);
-            this.pnlChart.Name = "pnlChart";
-            this.pnlChart.Size = new System.Drawing.Size(446, 438);
-            this.pnlChart.TabIndex = 5;
+            this.lblMomentum.Location = new System.Drawing.Point(736, 136);
+            this.lblMomentum.Name = "lblMomentum";
+            this.lblMomentum.Size = new System.Drawing.Size(26, 18);
+            this.lblMomentum.TabIndex = 9;
+            this.lblMomentum.Text = "μ = ";
             // 
-            // chrtError
+            // lblLearningRate
             // 
-            this.chrtError.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chrtError.Location = new System.Drawing.Point(0, 0);
-            this.chrtError.Name = "chrtError";
-            this.chrtError.RangeX = ((AForge.Range)(resources.GetObject("chrtError.RangeX")));
-            this.chrtError.RangeY = ((AForge.Range)(resources.GetObject("chrtError.RangeY")));
-            this.chrtError.Size = new System.Drawing.Size(446, 438);
-            this.chrtError.TabIndex = 2;
-            this.chrtError.Text = "Error Function";
+            this.lblLearningRate.Location = new System.Drawing.Point(657, 136);
+            this.lblLearningRate.Name = "lblLearningRate";
+            this.lblLearningRate.Size = new System.Drawing.Size(26, 18);
+            this.lblLearningRate.TabIndex = 9;
+            this.lblLearningRate.Text = "α = ";
+            // 
+            // btnAddLayer
+            // 
+            this.btnAddLayer.Location = new System.Drawing.Point(455, 131);
+            this.btnAddLayer.Name = "btnAddLayer";
+            this.btnAddLayer.Size = new System.Drawing.Size(95, 23);
+            this.btnAddLayer.TabIndex = 6;
+            this.btnAddLayer.Text = "Add Layer";
+            this.btnAddLayer.UseVisualStyleBackColor = true;
+            this.btnAddLayer.Click += new System.EventHandler(this.AddLayerClick);
+            // 
+            // btnRemoveLayer
+            // 
+            this.btnRemoveLayer.Enabled = false;
+            this.btnRemoveLayer.Location = new System.Drawing.Point(556, 131);
+            this.btnRemoveLayer.Name = "btnRemoveLayer";
+            this.btnRemoveLayer.Size = new System.Drawing.Size(95, 23);
+            this.btnRemoveLayer.TabIndex = 7;
+            this.btnRemoveLayer.Text = "Remove Layer";
+            this.btnRemoveLayer.UseVisualStyleBackColor = true;
+            this.btnRemoveLayer.Click += new System.EventHandler(this.RemoveLayerClick);
+            // 
+            // dgviewLoadedData
+            // 
+            this.dgviewLoadedData.AllowUserToAddRows = false;
+            this.dgviewLoadedData.AllowUserToDeleteRows = false;
+            this.dgviewLoadedData.AllowUserToResizeColumns = false;
+            this.dgviewLoadedData.AllowUserToResizeRows = false;
+            this.dgviewLoadedData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgviewLoadedData.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dgviewLoadedData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgviewLoadedData.Location = new System.Drawing.Point(455, 195);
+            this.dgviewLoadedData.Name = "dgviewLoadedData";
+            this.dgviewLoadedData.RowHeadersVisible = false;
+            this.dgviewLoadedData.ShowEditingIcon = false;
+            this.dgviewLoadedData.Size = new System.Drawing.Size(359, 220);
+            this.dgviewLoadedData.TabIndex = 8;
             // 
             // gboxNetTopology
             // 
@@ -180,93 +212,55 @@ namespace NeuralNetworksProject
             this.pnlNetTopology.Size = new System.Drawing.Size(356, 103);
             this.pnlNetTopology.TabIndex = 0;
             // 
-            // dgviewLoadedData
+            // pnlChart
             // 
-            this.dgviewLoadedData.AllowUserToAddRows = false;
-            this.dgviewLoadedData.AllowUserToDeleteRows = false;
-            this.dgviewLoadedData.AllowUserToResizeColumns = false;
-            this.dgviewLoadedData.AllowUserToResizeRows = false;
-            this.dgviewLoadedData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgviewLoadedData.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dgviewLoadedData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgviewLoadedData.Location = new System.Drawing.Point(455, 195);
-            this.dgviewLoadedData.Name = "dgviewLoadedData";
-            this.dgviewLoadedData.RowHeadersVisible = false;
-            this.dgviewLoadedData.ShowEditingIcon = false;
-            this.dgviewLoadedData.Size = new System.Drawing.Size(359, 220);
-            this.dgviewLoadedData.TabIndex = 8;
+            this.pnlChart.Controls.Add(this.progbarTrainingProcess);
+            this.pnlChart.Controls.Add(this.chrtError);
+            this.pnlChart.Location = new System.Drawing.Point(3, 6);
+            this.pnlChart.Name = "pnlChart";
+            this.pnlChart.Size = new System.Drawing.Size(446, 438);
+            this.pnlChart.TabIndex = 5;
             // 
-            // btnRemoveLayer
+            // btnTest
             // 
-            this.btnRemoveLayer.Enabled = false;
-            this.btnRemoveLayer.Location = new System.Drawing.Point(556, 131);
-            this.btnRemoveLayer.Name = "btnRemoveLayer";
-            this.btnRemoveLayer.Size = new System.Drawing.Size(95, 23);
-            this.btnRemoveLayer.TabIndex = 7;
-            this.btnRemoveLayer.Text = "Remove Layer";
-            this.btnRemoveLayer.UseVisualStyleBackColor = true;
-            this.btnRemoveLayer.Click += new System.EventHandler(this.RemoveLayerClick);
+            this.btnTest.Location = new System.Drawing.Point(739, 421);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.TabIndex = 4;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.TestNetworkClick);
             // 
-            // btnAddLayer
+            // btnSetNetwork
             // 
-            this.btnAddLayer.Location = new System.Drawing.Point(455, 131);
-            this.btnAddLayer.Name = "btnAddLayer";
-            this.btnAddLayer.Size = new System.Drawing.Size(95, 23);
-            this.btnAddLayer.TabIndex = 6;
-            this.btnAddLayer.Text = "Add Layer";
-            this.btnAddLayer.UseVisualStyleBackColor = true;
-            this.btnAddLayer.Click += new System.EventHandler(this.AddLayerClick);
+            this.btnSetNetwork.Enabled = false;
+            this.btnSetNetwork.Location = new System.Drawing.Point(455, 166);
+            this.btnSetNetwork.Name = "btnSetNetwork";
+            this.btnSetNetwork.Size = new System.Drawing.Size(95, 23);
+            this.btnSetNetwork.TabIndex = 0;
+            this.btnSetNetwork.Text = "Set Network";
+            this.btnSetNetwork.UseVisualStyleBackColor = true;
+            this.btnSetNetwork.Click += new System.EventHandler(this.SetNetworkClick);
             // 
-            // lblLearningRate
+            // btnTrain
             // 
-            this.lblLearningRate.Location = new System.Drawing.Point(657, 136);
-            this.lblLearningRate.Name = "lblLearningRate";
-            this.lblLearningRate.Size = new System.Drawing.Size(26, 18);
-            this.lblLearningRate.TabIndex = 9;
-            this.lblLearningRate.Text = "α = ";
+            this.btnTrain.Location = new System.Drawing.Point(596, 421);
+            this.btnTrain.Name = "btnTrain";
+            this.btnTrain.Size = new System.Drawing.Size(75, 23);
+            this.btnTrain.TabIndex = 2;
+            this.btnTrain.Text = "Train";
+            this.btnTrain.UseVisualStyleBackColor = true;
+            this.btnTrain.Click += new System.EventHandler(this.TrainNetrworkClick);
             // 
-            // lblMomentum
+            // btnLoadData
             // 
-            this.lblMomentum.Location = new System.Drawing.Point(736, 136);
-            this.lblMomentum.Name = "lblMomentum";
-            this.lblMomentum.Size = new System.Drawing.Size(26, 18);
-            this.lblMomentum.TabIndex = 9;
-            this.lblMomentum.Text = "μ = ";
-            // 
-            // txtbxLearningRate
-            // 
-            this.txtbxLearningRate.Location = new System.Drawing.Point(689, 133);
-            this.txtbxLearningRate.Name = "txtbxLearningRate";
-            this.txtbxLearningRate.Size = new System.Drawing.Size(37, 20);
-            this.txtbxLearningRate.TabIndex = 10;
-            this.txtbxLearningRate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
-            // 
-            // txtbxMomentum
-            // 
-            this.txtbxMomentum.Location = new System.Drawing.Point(768, 133);
-            this.txtbxMomentum.Name = "txtbxMomentum";
-            this.txtbxMomentum.Size = new System.Drawing.Size(37, 20);
-            this.txtbxMomentum.TabIndex = 10;
-            this.txtbxMomentum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
-            // 
-            // comboAlgorithm
-            // 
-            this.comboAlgorithm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboAlgorithm.FormattingEnabled = true;
-            this.comboAlgorithm.Location = new System.Drawing.Point(660, 169);
-            this.comboAlgorithm.Name = "comboAlgorithm";
-            this.comboAlgorithm.Size = new System.Drawing.Size(145, 21);
-            this.comboAlgorithm.TabIndex = 11;
-            this.comboAlgorithm.SelectedIndexChanged += new System.EventHandler(this.AlgorithmSelected);
-            // 
-            // lblAlgorithm
-            // 
-            this.lblAlgorithm.AutoSize = true;
-            this.lblAlgorithm.Location = new System.Drawing.Point(556, 171);
-            this.lblAlgorithm.Name = "lblAlgorithm";
-            this.lblAlgorithm.Size = new System.Drawing.Size(97, 13);
-            this.lblAlgorithm.TabIndex = 12;
-            this.lblAlgorithm.Text = "Training Algorithm :";
+            this.btnLoadData.Location = new System.Drawing.Point(455, 421);
+            this.btnLoadData.Name = "btnLoadData";
+            this.btnLoadData.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadData.TabIndex = 1;
+            this.btnLoadData.Text = "Load Data";
+            this.btnLoadData.UseVisualStyleBackColor = true;
+            this.btnLoadData.Click += new System.EventHandler(this.LoadDataClick);
             // 
             // tabCtrlMain
             // 
@@ -277,6 +271,33 @@ namespace NeuralNetworksProject
             this.tabCtrlMain.SelectedIndex = 0;
             this.tabCtrlMain.Size = new System.Drawing.Size(831, 476);
             this.tabCtrlMain.TabIndex = 0;
+            // 
+            // chrtError
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chrtError.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chrtError.Legends.Add(legend1);
+            this.chrtError.Location = new System.Drawing.Point(3, 3);
+            this.chrtError.Name = "chrtError";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
+            series1.Name = "Error";
+            this.chrtError.Series.Add(series1);
+            this.chrtError.Size = new System.Drawing.Size(440, 403);
+            this.chrtError.TabIndex = 0;
+            this.chrtError.Text = "ErrorFunction";
+            // 
+            // progbarTrainingProcess
+            // 
+            this.progbarTrainingProcess.Location = new System.Drawing.Point(3, 412);
+            this.progbarTrainingProcess.Name = "progbarTrainingProcess";
+            this.progbarTrainingProcess.Size = new System.Drawing.Size(440, 23);
+            this.progbarTrainingProcess.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progbarTrainingProcess.TabIndex = 1;
+            this.progbarTrainingProcess.Value = 30;
             // 
             // MainForm
             // 
@@ -289,10 +310,11 @@ namespace NeuralNetworksProject
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProgramClosing);
             this.tabpgSupervisedLearning.ResumeLayout(false);
             this.tabpgSupervisedLearning.PerformLayout();
-            this.pnlChart.ResumeLayout(false);
-            this.gboxNetTopology.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).EndInit();
+            this.gboxNetTopology.ResumeLayout(false);
+            this.pnlChart.ResumeLayout(false);
             this.tabCtrlMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chrtError)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,12 +336,13 @@ namespace NeuralNetworksProject
         private System.Windows.Forms.GroupBox gboxNetTopology;
         private System.Windows.Forms.Panel pnlNetTopology;
         private System.Windows.Forms.Panel pnlChart;
-        private AForge.Controls.Chart chrtError;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Button btnSetNetwork;
         private System.Windows.Forms.Button btnTrain;
         private System.Windows.Forms.Button btnLoadData;
         private System.Windows.Forms.TabControl tabCtrlMain;
+        private System.Windows.Forms.ProgressBar progbarTrainingProcess;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chrtError;
     }
 }
 
