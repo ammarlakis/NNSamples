@@ -116,11 +116,6 @@ namespace NeuralNetworksProject
                 {
                     stopTraining = true;
                     btnTrain.Text = "Train";
-                    while (!workerThread.Join(100))
-                    {
-                        Application.DoEvents();
-                        workerThread = null;
-                    }
                 }
                 else
                 {
