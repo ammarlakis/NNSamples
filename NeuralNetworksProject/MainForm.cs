@@ -95,8 +95,15 @@ namespace NeuralNetworksProject
                 {
                     dataTable = new ExcelReader(ofdlgLoadData.OpenFile(),true,false).GetWorksheet("data");
                     dataTable.Columns[0].ColumnName = "Input";
-                    dataTable.Columns[1].ColumnName = "Output";
+                    dataTable.Columns[1].ColumnName = "Target";
                     dgviewLoadedData.DataSource = dataTable;
+                    input = new double[dgviewLoadedData.RowCount][];
+                    target = new double[dgviewLoadedData.RowCount][];
+                    for (int i = 0; i < input.Length; i++)
+                    {
+                        input[i] = dgviewLoadedData[0, i].Value.ToString().Split(',').Select(double.Parse).ToArray();
+                        target[i] = dgviewLoadedData[1, i].Value.ToString().Split(',').Select(double.Parse).ToArray();
+                    }
                 }
                 catch (Exception exception)
                 {
@@ -120,16 +127,9 @@ namespace NeuralNetworksProject
                 }
                 else
                 {
-                    this.chrtError.Series["Error"].Points.Clear();
-                    input = new double[dgviewLoadedData.RowCount][];
-                    target = new double[dgviewLoadedData.RowCount][];
-                    for (int i = 0; i < input.Length; i++)
-                    {
-                        input[i] = dgviewLoadedData[0, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
-                        target[i] = dgviewLoadedData[1, i].Value.ToString().Split(',').Select(item => double.Parse(item)).ToArray();
-                    }
                     if (ShowTrainingInputDialog())
                     {
+                        this.chrtError.Series["Error"].Points.Clear();
                         btnTrain.Text = "Stop";
                         workerThread = new Thread(new ThreadStart(Train));
                         workerThread.Start();
@@ -192,23 +192,18 @@ namespace NeuralNetworksProject
             }
             else
             {
-                double[][] input = new double[4][];
-                input[0] = new double[] {0, 0};
-                input[1] = new double[] {0, 1};
-                input[2] = new double[] {1, 0};
-                input[3] = new double[] {1, 1};
-                double[][] output = new double[4][]
-                {
-                    new double[] {0},
-                    new double[] {1},
-                    new double[] {1},
-                    new double[] {0}
-                };
-
+                dgviewLoadedData.Columns.Add("Output","Output");
                 for (int i = 0; i < input.Length; i++)
                 {
-                    actNet.Compute(input.GetRow(i));
-                    MessageBox.Show(Math.Abs(output[i][0] - actNet.Output[0]).ToString());
+                    double[] output = actNet.Compute(input.GetRow(i));
+                    string outputs = Math.Round((decimal)output[0],4).ToString();
+                    for (int j = 1; j < output.Length - 1; j++)
+                    {
+                        outputs += "," + Math.Round((decimal)output[j], 4);
+                    }
+                    DataGridViewCell cell = new DataGridViewTextBoxCell();
+                    cell.Value = outputs;
+                    dgviewLoadedData["Output", i] = cell;
                 }
             }
         }
