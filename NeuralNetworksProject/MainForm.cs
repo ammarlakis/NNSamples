@@ -152,7 +152,7 @@ namespace NeuralNetworksProject
                 ((BackPropagationLearning)teacher).LearningRate = double.Parse(txtbxLearningRate.Text);
                 ((BackPropagationLearning)teacher).Momentum = double.Parse(txtbxMomentum.Text);
             }
-            else if (selectedMethod == Methods.Backpropagation)
+            else if (selectedMethod == Methods.LevenbergMarquardt)
             {
                 teacher = new LevenbergMarquardtLearning(actNet);
                 ((LevenbergMarquardtLearning)teacher).LearningRate = double.Parse(txtbxLearningRate.Text);
@@ -165,20 +165,32 @@ namespace NeuralNetworksProject
             {
                 double error = teacher.RunEpoch(input, target);
                 errorsList.Add(error);
-                if (stopTraining || ((error <= errorLimit) && (epoches == 0)))
+                if (stopTraining || (error <= errorLimit) || (epoches == 0))
                 {
                     break;
                 }
                 epoches--;
             }
-            double[,] errors = new double[errorsList.Count, 2];
-            for (int i = 0, n = errorsList.Count; i < n; i++)
+            stopTraining = true;
+            this.Invoke((MethodInvoker) delegate
             {
-                errors[i, 0] = i;
-                errors[i, 1] = (double)errorsList[i];
+                this.btnTrain.Text = "Train";
+            });
+            if (errorsList.Count < 2)
+            {
+                MessageBox.Show("Neural network already optimized for minimum error output");
             }
-            chrtError.RangeX = new Range(0, errorsList.Count - 1);
-            chrtError.UpdateDataSeries("error", errors);
+            else
+            {
+                double[,] errors = new double[errorsList.Count, 2];
+                for (int i = 0, n = errorsList.Count; i < n; i++)
+                {
+                    errors[i, 0] = i;
+                    errors[i, 1] = (double)errorsList[i];
+                }
+                chrtError.RangeX = new Range(0, errorsList.Count - 1);
+                chrtError.UpdateDataSeries("error", errors);
+            }
         }
         private void TestNetworkClick(object sender, EventArgs e)
         {
