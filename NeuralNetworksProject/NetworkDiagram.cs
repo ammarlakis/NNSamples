@@ -7,16 +7,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AForge.Neuro;
 
 namespace NeuralNetworksProject
 {
     public partial class NetworkDiagram : UserControl
     {
-        public NetworkDiagram()
+        private Graphics g;
+        private bool done;
+        private Pen pBlack, pGray;
+        private Network network;
+        public NetworkDiagram(Network net)
         {
             InitializeComponent();
-            Graphics g = this.CreateGraphics();
-            g.DrawString("This is a test", new Font("Arial", 10), new SolidBrush(Color.Black), 20, 20);
+            g = this.CreateGraphics();
+            done = false;
+            pBlack = new Pen(Color.Black);
+            pGray = new Pen(Color.Gray);
+            this.network = net;
+        }
+
+        private void NetworkDiagram_Paint(object sender, PaintEventArgs e)
+        {
+            DrawNetwork(this.network);
+            if (! done)
+            {
+                done = false;
+                this.Update();
+            }
+        }
+
+        private Point[] DrawNetwork(Network net)
+        {
+            
         }
     }
 }
