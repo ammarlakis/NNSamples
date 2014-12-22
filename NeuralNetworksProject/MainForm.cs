@@ -259,6 +259,17 @@ namespace NeuralNetworksProject
                 target[i] = dgviewLoadedData[1, i].Value.ToString().Split(',').Select(double.Parse).ToArray();
             }
         }
+
+        private void ShowNetworkDiagramClick(object sender, EventArgs e)
+        {
+            Form networkDiagramForm = new Form();
+            networkDiagramForm.FormBorderStyle = FormBorderStyle.None;
+            networkDiagramForm.AutoSize = false;
+            networkDiagramForm.AutoScroll = true;
+            NetworkDiagram netDiagram = new NetworkDiagram();
+            networkDiagramForm.Controls.Add(netDiagram);
+            networkDiagramForm.ShowDialog(this);
+        }
     }
 }
 
