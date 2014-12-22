@@ -263,10 +263,12 @@ namespace NeuralNetworksProject
         private void ShowNetworkDiagramClick(object sender, EventArgs e)
         {
             Form networkDiagramForm = new Form();
-            networkDiagramForm.FormBorderStyle = FormBorderStyle.None;
+            networkDiagramForm.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            networkDiagramForm.Size = new Size(600,400);
             networkDiagramForm.AutoSize = false;
             networkDiagramForm.AutoScroll = true;
             NetworkDiagram netDiagram = new NetworkDiagram();
+            netDiagram.Dock = DockStyle.Fill;
             networkDiagramForm.Controls.Add(netDiagram);
             networkDiagramForm.ShowDialog(this);
         }
