@@ -93,10 +93,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LayerControl.cs">
+    <Compile Include="Controls\LayerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LayerControl.Designer.cs">
+    <Compile Include="Controls\LayerControl.Designer.cs">
       <DependentUpon>LayerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -105,27 +105,27 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NetworkDiagram.cs">
+    <Compile Include="Controls\NetworkDiagram.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NetworkDiagram.Designer.cs">
+    <Compile Include="Controls\NetworkDiagram.Designer.cs">
       <DependentUpon>NetworkDiagram.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrainingInputDialog.cs">
+    <Compile Include="Controls\TrainingInputDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrainingInputDialog.Designer.cs">
+    <Compile Include="Controls\TrainingInputDialog.Designer.cs">
       <DependentUpon>TrainingInputDialog.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="LayerControl.resx">
+    <EmbeddedResource Include="Controls\LayerControl.resx">
       <DependentUpon>LayerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NetworkDiagram.resx">
+    <EmbeddedResource Include="Controls\NetworkDiagram.resx">
       <DependentUpon>NetworkDiagram.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -137,7 +137,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="TrainingInputDialog.resx">
+    <EmbeddedResource Include="Controls\TrainingInputDialog.resx">
       <DependentUpon>TrainingInputDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -153,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
