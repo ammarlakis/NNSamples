@@ -267,7 +267,7 @@ namespace NeuralNetworksProject
             networkDiagramForm.Size = new Size(600,400);
             networkDiagramForm.AutoSize = false;
             networkDiagramForm.AutoScroll = true;
-            NetworkDiagram netDiagram = new NetworkDiagram();
+            NetworkDiagram netDiagram = new NetworkDiagram(actNet);
             netDiagram.Dock = DockStyle.Fill;
             networkDiagramForm.Controls.Add(netDiagram);
             networkDiagramForm.ShowDialog(this);

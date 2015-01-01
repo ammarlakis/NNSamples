@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+﻿using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Neuro;
 
@@ -17,29 +11,42 @@ namespace NeuralNetworksProject
         private bool done;
         private Pen pBlack, pGray;
         private Network network;
+        private static Size circleSize = new Size(50, 50);
+        private static int hStep = 120, vStep = 75;
         public NetworkDiagram(Network net)
         {
             InitializeComponent();
-            g = this.CreateGraphics();
+            Size = new Size(net.Layers.Length * hStep, net.Layers.Select(layer => layer.Neurons.Count()).Concat(new[] { 0 }).Max() * vStep);
+            g = CreateGraphics();
             done = false;
             pBlack = new Pen(Color.Black);
             pGray = new Pen(Color.Gray);
-            this.network = net;
+            network = net;
         }
 
         private void NetworkDiagram_Paint(object sender, PaintEventArgs e)
         {
-            DrawNetwork(this.network);
+            DrawNetwork(network);
             if (! done)
             {
                 done = false;
-                this.Update();
+                Update();
             }
         }
 
         private Point[] DrawNetwork(Network net)
         {
-            
+            // Draw firstlayer input
+            for (int ilayer = 0; ilayer < net.Layers.Count(); ilayer++)
+            {
+                for (int jneuron = 0; jneuron < net.Layers[ilayer].Neurons.Count(); jneuron++)
+                {
+                    //Draw Circle
+                    g.FillEllipse(new SolidBrush(Color.Black), new Rectangle(new Point(ilayer * hStep, jneuron * vStep), circleSize));
+                    //Draw Lines to next layer
+                }
+            }
+            return null;
         }
     }
 }
