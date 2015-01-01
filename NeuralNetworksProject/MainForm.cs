@@ -79,7 +79,7 @@ namespace NeuralNetworksProject
         {
             int inputLayerSize = int.Parse(((NumericUpDown)layersControls[0].Controls[1]).Text);
             int[] layers = new int[layersControls.Count - 1];
-            for (int i = 1; i < layersControls.Count - 1; i++)
+            for (int i = 1; i < layersControls.Count; i++)
             {
                 layers[i-1] = int.Parse(((NumericUpDown) layersControls[i].Controls[1]).Text);
             }
