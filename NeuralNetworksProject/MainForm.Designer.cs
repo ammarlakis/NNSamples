@@ -32,13 +32,13 @@ namespace NeuralNetworksProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
             this.tabpgUnsupervisedLearning = new System.Windows.Forms.TabPage();
             this.pnlChartHopfield = new System.Windows.Forms.Panel();
@@ -74,6 +74,7 @@ namespace NeuralNetworksProject
             this.btnSetHopfieldNetwork = new System.Windows.Forms.Button();
             this.lblEpochs = new System.Windows.Forms.Label();
             this.txtbxEpochs = new System.Windows.Forms.TextBox();
+            this.btnTrainHopfield = new System.Windows.Forms.Button();
             this.tabpgUnsupervisedLearning.SuspendLayout();
             this.pnlChartHopfield.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrtHopfield)).BeginInit();
@@ -94,6 +95,7 @@ namespace NeuralNetworksProject
             // tabpgUnsupervisedLearning
             // 
             this.tabpgUnsupervisedLearning.BackColor = System.Drawing.Color.Transparent;
+            this.tabpgUnsupervisedLearning.Controls.Add(this.btnTrainHopfield);
             this.tabpgUnsupervisedLearning.Controls.Add(this.lblEpochs);
             this.tabpgUnsupervisedLearning.Controls.Add(this.txtbxEpochs);
             this.tabpgUnsupervisedLearning.Controls.Add(this.btnSetHopfieldNetwork);
@@ -138,23 +140,23 @@ namespace NeuralNetworksProject
             // 
             // chrtHopfield
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chrtHopfield.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.chrtHopfield.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chrtHopfield.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chrtHopfield.Legends.Add(legend1);
             this.chrtHopfield.Location = new System.Drawing.Point(3, 3);
             this.chrtHopfield.Name = "chrtHopfield";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series4.Legend = "Legend1";
-            series4.Name = "City";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "Series2";
-            this.chrtHopfield.Series.Add(series4);
-            this.chrtHopfield.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series1.Legend = "Legend1";
+            series1.Name = "City";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Series2";
+            this.chrtHopfield.Series.Add(series1);
+            this.chrtHopfield.Series.Add(series2);
             this.chrtHopfield.Size = new System.Drawing.Size(440, 403);
             this.chrtHopfield.TabIndex = 0;
             this.chrtHopfield.Text = "Cities";
@@ -322,17 +324,17 @@ namespace NeuralNetworksProject
             // 
             // chrtError
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chrtError.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chrtError.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chrtError.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chrtError.Legends.Add(legend2);
             this.chrtError.Location = new System.Drawing.Point(3, 3);
             this.chrtError.Name = "chrtError";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Legend = "Legend1";
-            series6.Name = "Error";
-            this.chrtError.Series.Add(series6);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Error";
+            this.chrtError.Series.Add(series3);
             this.chrtError.Size = new System.Drawing.Size(440, 403);
             this.chrtError.TabIndex = 0;
             this.chrtError.Text = "ErrorFunction";
@@ -456,6 +458,15 @@ namespace NeuralNetworksProject
             this.txtbxEpochs.Size = new System.Drawing.Size(102, 20);
             this.txtbxEpochs.TabIndex = 106;
             // 
+            // btnTrainHopfield
+            // 
+            this.btnTrainHopfield.Location = new System.Drawing.Point(601, 262);
+            this.btnTrainHopfield.Name = "btnTrainHopfield";
+            this.btnTrainHopfield.Size = new System.Drawing.Size(75, 23);
+            this.btnTrainHopfield.TabIndex = 108;
+            this.btnTrainHopfield.Text = "Train";
+            this.btnTrainHopfield.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +530,7 @@ namespace NeuralNetworksProject
         private System.Windows.Forms.Label lblCities;
         private System.Windows.Forms.TextBox txtbxCities;
         private System.Windows.Forms.TextBox txtbxNeurons;
+        private System.Windows.Forms.Button btnTrainHopfield;
     }
 }
 
