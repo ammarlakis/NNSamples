@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace NeuralNetworksProject
 {
@@ -31,11 +32,19 @@ namespace NeuralNetworksProject
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
             this.tabpgUnsupervisedLearning = new System.Windows.Forms.TabPage();
+            this.pnlChartHopfield = new System.Windows.Forms.Panel();
+            this.lblHopfieldProgress = new System.Windows.Forms.Label();
+            this.pgbarHopfield = new System.Windows.Forms.ProgressBar();
+            this.chrtHopfield = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabpgSupervisedLearning = new System.Windows.Forms.TabPage();
             this.lblAlgorithm = new System.Windows.Forms.Label();
             this.comboAlgorithm = new System.Windows.Forms.ComboBox();
@@ -52,12 +61,22 @@ namespace NeuralNetworksProject
             this.lblTrainingProcess = new System.Windows.Forms.Label();
             this.progbarTrainingProcess = new System.Windows.Forms.ProgressBar();
             this.chrtError = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnShowDiagram = new System.Windows.Forms.Button();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnSetNetwork = new System.Windows.Forms.Button();
             this.btnTrain = new System.Windows.Forms.Button();
             this.btnLoadData = new System.Windows.Forms.Button();
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
-            this.btnShowDiagram = new System.Windows.Forms.Button();
+            this.txtbxNeurons = new System.Windows.Forms.TextBox();
+            this.txtbxCities = new System.Windows.Forms.TextBox();
+            this.lblCities = new System.Windows.Forms.Label();
+            this.lblNeurons = new System.Windows.Forms.Label();
+            this.btnSetHopfieldNetwork = new System.Windows.Forms.Button();
+            this.lblEpochs = new System.Windows.Forms.Label();
+            this.txtbxEpochs = new System.Windows.Forms.TextBox();
+            this.tabpgUnsupervisedLearning.SuspendLayout();
+            this.pnlChartHopfield.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chrtHopfield)).BeginInit();
             this.tabpgSupervisedLearning.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).BeginInit();
             this.gboxNetTopology.SuspendLayout();
@@ -75,12 +94,70 @@ namespace NeuralNetworksProject
             // tabpgUnsupervisedLearning
             // 
             this.tabpgUnsupervisedLearning.BackColor = System.Drawing.Color.Transparent;
+            this.tabpgUnsupervisedLearning.Controls.Add(this.lblEpochs);
+            this.tabpgUnsupervisedLearning.Controls.Add(this.txtbxEpochs);
+            this.tabpgUnsupervisedLearning.Controls.Add(this.btnSetHopfieldNetwork);
+            this.tabpgUnsupervisedLearning.Controls.Add(this.lblNeurons);
+            this.tabpgUnsupervisedLearning.Controls.Add(this.lblCities);
+            this.tabpgUnsupervisedLearning.Controls.Add(this.txtbxCities);
+            this.tabpgUnsupervisedLearning.Controls.Add(this.txtbxNeurons);
+            this.tabpgUnsupervisedLearning.Controls.Add(this.pnlChartHopfield);
             this.tabpgUnsupervisedLearning.Location = new System.Drawing.Point(4, 22);
             this.tabpgUnsupervisedLearning.Name = "tabpgUnsupervisedLearning";
             this.tabpgUnsupervisedLearning.Padding = new System.Windows.Forms.Padding(3);
             this.tabpgUnsupervisedLearning.Size = new System.Drawing.Size(823, 450);
             this.tabpgUnsupervisedLearning.TabIndex = 2;
             this.tabpgUnsupervisedLearning.Text = "UnsupervisedLearning";
+            // 
+            // pnlChartHopfield
+            // 
+            this.pnlChartHopfield.Controls.Add(this.lblHopfieldProgress);
+            this.pnlChartHopfield.Controls.Add(this.pgbarHopfield);
+            this.pnlChartHopfield.Controls.Add(this.chrtHopfield);
+            this.pnlChartHopfield.Location = new System.Drawing.Point(3, 6);
+            this.pnlChartHopfield.Name = "pnlChartHopfield";
+            this.pnlChartHopfield.Size = new System.Drawing.Size(446, 438);
+            this.pnlChartHopfield.TabIndex = 101;
+            // 
+            // lblHopfieldProgress
+            // 
+            this.lblHopfieldProgress.AutoSize = true;
+            this.lblHopfieldProgress.BackColor = System.Drawing.Color.White;
+            this.lblHopfieldProgress.Location = new System.Drawing.Point(199, 417);
+            this.lblHopfieldProgress.Name = "lblHopfieldProgress";
+            this.lblHopfieldProgress.Size = new System.Drawing.Size(0, 13);
+            this.lblHopfieldProgress.TabIndex = 2;
+            // 
+            // pgbarHopfield
+            // 
+            this.pgbarHopfield.Location = new System.Drawing.Point(3, 412);
+            this.pgbarHopfield.Name = "pgbarHopfield";
+            this.pgbarHopfield.Size = new System.Drawing.Size(440, 23);
+            this.pgbarHopfield.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pgbarHopfield.TabIndex = 0;
+            // 
+            // chrtHopfield
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chrtHopfield.ChartAreas.Add(chartArea3);
+            legend3.Enabled = false;
+            legend3.Name = "Legend1";
+            this.chrtHopfield.Legends.Add(legend3);
+            this.chrtHopfield.Location = new System.Drawing.Point(3, 3);
+            this.chrtHopfield.Name = "chrtHopfield";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series4.Legend = "Legend1";
+            series4.Name = "City";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.Name = "Series2";
+            this.chrtHopfield.Series.Add(series4);
+            this.chrtHopfield.Series.Add(series5);
+            this.chrtHopfield.Size = new System.Drawing.Size(440, 403);
+            this.chrtHopfield.TabIndex = 0;
+            this.chrtHopfield.Text = "Cities";
             // 
             // tabpgSupervisedLearning
             // 
@@ -245,20 +322,30 @@ namespace NeuralNetworksProject
             // 
             // chrtError
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chrtError.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chrtError.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.chrtError.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chrtError.Legends.Add(legend4);
             this.chrtError.Location = new System.Drawing.Point(3, 3);
             this.chrtError.Name = "chrtError";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "Error";
-            this.chrtError.Series.Add(series2);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Legend = "Legend1";
+            series6.Name = "Error";
+            this.chrtError.Series.Add(series6);
             this.chrtError.Size = new System.Drawing.Size(440, 403);
             this.chrtError.TabIndex = 0;
             this.chrtError.Text = "ErrorFunction";
+            // 
+            // btnShowDiagram
+            // 
+            this.btnShowDiagram.Location = new System.Drawing.Point(739, 421);
+            this.btnShowDiagram.Name = "btnShowDiagram";
+            this.btnShowDiagram.Size = new System.Drawing.Size(75, 23);
+            this.btnShowDiagram.TabIndex = 11;
+            this.btnShowDiagram.Text = "Weights";
+            this.btnShowDiagram.UseVisualStyleBackColor = true;
+            this.btnShowDiagram.Click += new System.EventHandler(this.ShowNetworkDiagramClick);
             // 
             // btnTest
             // 
@@ -311,15 +398,63 @@ namespace NeuralNetworksProject
             this.tabCtrlMain.Size = new System.Drawing.Size(831, 476);
             this.tabCtrlMain.TabIndex = 0;
             // 
-            // btnShowDiagram
+            // txtbxNeurons
             // 
-            this.btnShowDiagram.Location = new System.Drawing.Point(739, 421);
-            this.btnShowDiagram.Name = "btnShowDiagram";
-            this.btnShowDiagram.Size = new System.Drawing.Size(75, 23);
-            this.btnShowDiagram.TabIndex = 11;
-            this.btnShowDiagram.Text = "Weights";
-            this.btnShowDiagram.UseVisualStyleBackColor = true;
-            this.btnShowDiagram.Click += new System.EventHandler(this.ShowNetworkDiagramClick);
+            this.txtbxNeurons.Location = new System.Drawing.Point(646, 92);
+            this.txtbxNeurons.Name = "txtbxNeurons";
+            this.txtbxNeurons.Size = new System.Drawing.Size(102, 20);
+            this.txtbxNeurons.TabIndex = 102;
+            // 
+            // txtbxCities
+            // 
+            this.txtbxCities.Location = new System.Drawing.Point(646, 55);
+            this.txtbxCities.Name = "txtbxCities";
+            this.txtbxCities.Size = new System.Drawing.Size(102, 20);
+            this.txtbxCities.TabIndex = 103;
+            // 
+            // lblCities
+            // 
+            this.lblCities.AutoSize = true;
+            this.lblCities.Location = new System.Drawing.Point(518, 58);
+            this.lblCities.Name = "lblCities";
+            this.lblCities.Size = new System.Drawing.Size(84, 13);
+            this.lblCities.TabIndex = 104;
+            this.lblCities.Text = "Number of Cities";
+            // 
+            // lblNeurons
+            // 
+            this.lblNeurons.AutoSize = true;
+            this.lblNeurons.Location = new System.Drawing.Point(518, 95);
+            this.lblNeurons.Name = "lblNeurons";
+            this.lblNeurons.Size = new System.Drawing.Size(99, 13);
+            this.lblNeurons.TabIndex = 104;
+            this.lblNeurons.Text = "Number of Neurons";
+            // 
+            // btnSetHopfieldNetwork
+            // 
+            this.btnSetHopfieldNetwork.Location = new System.Drawing.Point(601, 146);
+            this.btnSetHopfieldNetwork.Name = "btnSetHopfieldNetwork";
+            this.btnSetHopfieldNetwork.Size = new System.Drawing.Size(75, 23);
+            this.btnSetHopfieldNetwork.TabIndex = 105;
+            this.btnSetHopfieldNetwork.Text = "Set Network";
+            this.btnSetHopfieldNetwork.UseVisualStyleBackColor = true;
+            // 
+            // lblEpochs
+            // 
+            this.lblEpochs.AutoSize = true;
+            this.lblEpochs.Location = new System.Drawing.Point(518, 216);
+            this.lblEpochs.Name = "lblEpochs";
+            this.lblEpochs.Size = new System.Drawing.Size(43, 13);
+            this.lblEpochs.TabIndex = 107;
+            this.lblEpochs.Text = "Epochs";
+            // 
+            // txtbxEpochs
+            // 
+            this.txtbxEpochs.AcceptsReturn = true;
+            this.txtbxEpochs.Location = new System.Drawing.Point(646, 213);
+            this.txtbxEpochs.Name = "txtbxEpochs";
+            this.txtbxEpochs.Size = new System.Drawing.Size(102, 20);
+            this.txtbxEpochs.TabIndex = 106;
             // 
             // MainForm
             // 
@@ -330,6 +465,11 @@ namespace NeuralNetworksProject
             this.Name = "MainForm";
             this.Text = "Neural Network Examples";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProgramClosing);
+            this.tabpgUnsupervisedLearning.ResumeLayout(false);
+            this.tabpgUnsupervisedLearning.PerformLayout();
+            this.pnlChartHopfield.ResumeLayout(false);
+            this.pnlChartHopfield.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chrtHopfield)).EndInit();
             this.tabpgSupervisedLearning.ResumeLayout(false);
             this.tabpgSupervisedLearning.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewLoadedData)).EndInit();
@@ -368,6 +508,17 @@ namespace NeuralNetworksProject
         private System.Windows.Forms.DataVisualization.Charting.Chart chrtError;
         private System.Windows.Forms.Label lblTrainingProcess;
         private System.Windows.Forms.Button btnShowDiagram;
+        private System.Windows.Forms.Panel pnlChartHopfield;
+        private System.Windows.Forms.Label lblHopfieldProgress;
+        private System.Windows.Forms.ProgressBar pgbarHopfield;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chrtHopfield;
+        private System.Windows.Forms.Label lblEpochs;
+        private System.Windows.Forms.TextBox txtbxEpochs;
+        private System.Windows.Forms.Button btnSetHopfieldNetwork;
+        private System.Windows.Forms.Label lblNeurons;
+        private System.Windows.Forms.Label lblCities;
+        private System.Windows.Forms.TextBox txtbxCities;
+        private System.Windows.Forms.TextBox txtbxNeurons;
     }
 }
 

@@ -39,7 +39,6 @@ namespace NeuralNetworksProject
             InitializeComponent();
             this.comboAlgorithm.DataSource = Enum.GetValues(typeof(Methods));
             this.comboAlgorithm.SelectedItem = 0;
-            //chrtError.AddDataSeries("error", Color.Red, AForge.Controls.Chart.SeriesType.Line, 1);
          }
 
         private void AddLayerClick(object sender, EventArgs e)
