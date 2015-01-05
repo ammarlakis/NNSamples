@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Accord.IO;
 using Accord.Math;
+using Accord.Neuro;
+using Accord.Neuro.ActivationFunctions;
 using Accord.Neuro.Learning;
 using AForge;
 using AForge.Neuro;
@@ -21,7 +23,6 @@ namespace NeuralNetworksProject
     {
         private static Collection<UserControl>  layersControls = new Collection<UserControl>();
         private ActivationNetwork actNet;
-        private DataTable dataTable;
         private bool stopTraining = true;
         private Thread workerThread;
         private int epoches;
@@ -29,6 +30,21 @@ namespace NeuralNetworksProject
         private double[][] input;
         private double[][] target;
         private Methods selectedMethod = Methods.Backpropagation;
+
+        private DistanceNetwork dstNet;
+        private double[][] citiesMap;
+        
+        private IActivationFunction[] Functions = new IActivationFunction[]
+        {
+            new LinearFunction(), 
+            new ThresholdFunction(), 
+            new SigmoidFunction(), 
+            new BipolarSigmoidFunction(), 
+            new BernoulliFunction(),
+            new GaussianFunction(), 
+            new IdentityFunction(),
+            new RectifiedLinearFunction()
+        };
         private enum Methods
         {
             Backpropagation = 0, LevenbergMarquardt = 1
@@ -37,8 +53,6 @@ namespace NeuralNetworksProject
         public MainForm()
          {
             InitializeComponent();
-            this.comboAlgorithm.DataSource = Enum.GetValues(typeof(Methods));
-            this.comboAlgorithm.SelectedItem = 0;
          }
 
         private void AddLayerClick(object sender, EventArgs e)
@@ -78,11 +92,13 @@ namespace NeuralNetworksProject
         {
             int inputLayerSize = int.Parse(((NumericUpDown)layersControls[0].Controls[1]).Text);
             int[] layers = new int[layersControls.Count - 1];
+            IActivationFunction[] functions = new IActivationFunction[layersControls.Count - 1];
             for (int i = 1; i < layersControls.Count; i++)
             {
-                layers[i-1] = int.Parse(((NumericUpDown) layersControls[i].Controls[1]).Text);
+                layers[i - 1] = int.Parse(((NumericUpDown) layersControls[i].Controls[1]).Text);
+                functions[i - 1] = Functions[((ComboBox) layersControls[i].Controls[0]).SelectedIndex];
             }
-            actNet = new ActivationNetwork(new SigmoidFunction(),inputLayerSize,layers);
+            //actNet = new ActivationNetwork(new SigmoidFunction(), inputLayerSize, functions, layers);
         }
 
         private void LoadDataClick(object sender, EventArgs e)
@@ -92,7 +108,7 @@ namespace NeuralNetworksProject
             {
                 try
                 {
-                    dataTable = new ExcelReader(ofdlgLoadData.OpenFile(),true,false).GetWorksheet("data");
+                    DataTable dataTable = new ExcelReader(ofdlgLoadData.OpenFile(),true,false).GetWorksheet("data");
                     dataTable.Columns[0].ColumnName = "Input";
                     dataTable.Columns[1].ColumnName = "Target";
                     dgviewLoadedData.DataSource = dataTable;
@@ -117,6 +133,10 @@ namespace NeuralNetworksProject
             {
                 MessageBox.Show("You have to set the network first");
             }
+            else if (input == null)
+            {
+                MessageBox.Show("You have to load the data first");
+            }
             else
             {
                 if (!stopTraining)
@@ -130,7 +150,7 @@ namespace NeuralNetworksProject
                     {
                         this.chrtError.Series["Error"].Points.Clear();
                         btnTrain.Text = "Stop";
-                        workerThread = new Thread(new ThreadStart(Train));
+                        workerThread = new Thread(Train);
                         workerThread.Start();
                     }
                 }
@@ -188,6 +208,10 @@ namespace NeuralNetworksProject
             if (this.actNet == null)
             {
                 MessageBox.Show("You have to set the network first");
+            }
+            else if (input == null)
+            {
+                MessageBox.Show("You have to load the data first");
             }
             else
             {
@@ -261,16 +285,49 @@ namespace NeuralNetworksProject
 
         private void ShowNetworkDiagramClick(object sender, EventArgs e)
         {
-            Form networkDiagramForm = new Form();
-            //networkDiagramForm.FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            networkDiagramForm.Size = new Size(600,400);
-            networkDiagramForm.AutoSize = false;
-            networkDiagramForm.AutoScroll = true;
-            NetworkDiagram netDiagram = new NetworkDiagram(actNet);
-            netDiagram.Dock = DockStyle.Fill;
-            networkDiagramForm.Controls.Add(netDiagram);
-            networkDiagramForm.ShowDialog(this);
+            if (this.actNet == null)
+            {
+                MessageBox.Show("You have to set the network first");
+            }
+            else
+            {
+                Form networkDiagramForm = new Form {Size = new Size(600, 400), AutoSize = false, AutoScroll = true};
+                NetworkDiagram netDiagram = new NetworkDiagram(actNet) {Dock = DockStyle.Fill};
+                networkDiagramForm.Controls.Add(netDiagram);
+                networkDiagramForm.ShowDialog(this);
+            }
         }
+
+        private void SetHopfieldNetworkClick(object sender, EventArgs e)
+        {
+            int cities, neurons;
+            if ((int.TryParse(txtbxCities.Text, out cities) && int.TryParse(txtbxNeurons.Text, out neurons))
+                && (cities > 0) && (neurons > 0))
+            {
+                this.dstNet = new DistanceNetwork(cities, neurons);
+                citiesMap = new double[1][];
+                citiesMap[0] = new double[cities];
+                Random r = new Random(); 
+                for (int i = 0; i < cities; i++)
+                {
+                    citiesMap[0][i] = r.NextDouble();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wrong input !");
+            }
+        }
+
+        private void btnTrainHopfield_Click(object sender, EventArgs e)
+        {
+            int epoches;
+            if ((int.TryParse(txtbxEpochs.Text, out epoches)) && (epoches > 0))
+            {
+                
+            }
+        }
+
     }
 }
 

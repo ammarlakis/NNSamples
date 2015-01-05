@@ -5,6 +5,19 @@ namespace NeuralNetworksProject
 {
     public partial class LayerControl : UserControl
     {
+        public enum Functions
+        {
+            Linear,
+            Threshold,
+            Threashold,
+            Sigmoid,
+            Bibolar,
+            Bernoulli,
+            Gaussian,
+            Identity,
+            RectifiedLinear
+        }
+
         public LayerControl(int number)
         {
             InitializeComponent();

@@ -41,6 +41,14 @@ namespace NeuralNetworksProject
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.ofdlgLoadData = new System.Windows.Forms.OpenFileDialog();
             this.tabpgUnsupervisedLearning = new System.Windows.Forms.TabPage();
+            this.btnTrainHopfield = new System.Windows.Forms.Button();
+            this.lblEpochs = new System.Windows.Forms.Label();
+            this.txtbxEpochs = new System.Windows.Forms.TextBox();
+            this.btnSetHopfieldNetwork = new System.Windows.Forms.Button();
+            this.lblNeurons = new System.Windows.Forms.Label();
+            this.lblCities = new System.Windows.Forms.Label();
+            this.txtbxCities = new System.Windows.Forms.TextBox();
+            this.txtbxNeurons = new System.Windows.Forms.TextBox();
             this.pnlChartHopfield = new System.Windows.Forms.Panel();
             this.lblHopfieldProgress = new System.Windows.Forms.Label();
             this.pgbarHopfield = new System.Windows.Forms.ProgressBar();
@@ -67,14 +75,6 @@ namespace NeuralNetworksProject
             this.btnTrain = new System.Windows.Forms.Button();
             this.btnLoadData = new System.Windows.Forms.Button();
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
-            this.txtbxNeurons = new System.Windows.Forms.TextBox();
-            this.txtbxCities = new System.Windows.Forms.TextBox();
-            this.lblCities = new System.Windows.Forms.Label();
-            this.lblNeurons = new System.Windows.Forms.Label();
-            this.btnSetHopfieldNetwork = new System.Windows.Forms.Button();
-            this.lblEpochs = new System.Windows.Forms.Label();
-            this.txtbxEpochs = new System.Windows.Forms.TextBox();
-            this.btnTrainHopfield = new System.Windows.Forms.Button();
             this.tabpgUnsupervisedLearning.SuspendLayout();
             this.pnlChartHopfield.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chrtHopfield)).BeginInit();
@@ -110,6 +110,75 @@ namespace NeuralNetworksProject
             this.tabpgUnsupervisedLearning.Size = new System.Drawing.Size(823, 450);
             this.tabpgUnsupervisedLearning.TabIndex = 2;
             this.tabpgUnsupervisedLearning.Text = "UnsupervisedLearning";
+            // 
+            // btnTrainHopfield
+            // 
+            this.btnTrainHopfield.Location = new System.Drawing.Point(601, 262);
+            this.btnTrainHopfield.Name = "btnTrainHopfield";
+            this.btnTrainHopfield.Size = new System.Drawing.Size(75, 23);
+            this.btnTrainHopfield.TabIndex = 108;
+            this.btnTrainHopfield.Text = "Train";
+            this.btnTrainHopfield.UseVisualStyleBackColor = true;
+            this.btnTrainHopfield.Click += new System.EventHandler(this.btnTrainHopfield_Click);
+            // 
+            // lblEpochs
+            // 
+            this.lblEpochs.AutoSize = true;
+            this.lblEpochs.Location = new System.Drawing.Point(518, 216);
+            this.lblEpochs.Name = "lblEpochs";
+            this.lblEpochs.Size = new System.Drawing.Size(43, 13);
+            this.lblEpochs.TabIndex = 107;
+            this.lblEpochs.Text = "Epochs";
+            // 
+            // txtbxEpochs
+            // 
+            this.txtbxEpochs.AcceptsReturn = true;
+            this.txtbxEpochs.Location = new System.Drawing.Point(646, 213);
+            this.txtbxEpochs.Name = "txtbxEpochs";
+            this.txtbxEpochs.Size = new System.Drawing.Size(102, 20);
+            this.txtbxEpochs.TabIndex = 106;
+            // 
+            // btnSetHopfieldNetwork
+            // 
+            this.btnSetHopfieldNetwork.Location = new System.Drawing.Point(601, 146);
+            this.btnSetHopfieldNetwork.Name = "btnSetHopfieldNetwork";
+            this.btnSetHopfieldNetwork.Size = new System.Drawing.Size(75, 23);
+            this.btnSetHopfieldNetwork.TabIndex = 105;
+            this.btnSetHopfieldNetwork.Text = "Set Network";
+            this.btnSetHopfieldNetwork.UseVisualStyleBackColor = true;
+            this.btnSetHopfieldNetwork.Click += new System.EventHandler(this.SetHopfieldNetworkClick);
+            // 
+            // lblNeurons
+            // 
+            this.lblNeurons.AutoSize = true;
+            this.lblNeurons.Location = new System.Drawing.Point(518, 95);
+            this.lblNeurons.Name = "lblNeurons";
+            this.lblNeurons.Size = new System.Drawing.Size(99, 13);
+            this.lblNeurons.TabIndex = 104;
+            this.lblNeurons.Text = "Number of Neurons";
+            // 
+            // lblCities
+            // 
+            this.lblCities.AutoSize = true;
+            this.lblCities.Location = new System.Drawing.Point(518, 58);
+            this.lblCities.Name = "lblCities";
+            this.lblCities.Size = new System.Drawing.Size(84, 13);
+            this.lblCities.TabIndex = 104;
+            this.lblCities.Text = "Number of Cities";
+            // 
+            // txtbxCities
+            // 
+            this.txtbxCities.Location = new System.Drawing.Point(646, 55);
+            this.txtbxCities.Name = "txtbxCities";
+            this.txtbxCities.Size = new System.Drawing.Size(102, 20);
+            this.txtbxCities.TabIndex = 103;
+            // 
+            // txtbxNeurons
+            // 
+            this.txtbxNeurons.Location = new System.Drawing.Point(646, 92);
+            this.txtbxNeurons.Name = "txtbxNeurons";
+            this.txtbxNeurons.Size = new System.Drawing.Size(102, 20);
+            this.txtbxNeurons.TabIndex = 102;
             // 
             // pnlChartHopfield
             // 
@@ -198,6 +267,9 @@ namespace NeuralNetworksProject
             // 
             // comboAlgorithm
             // 
+            this.comboAlgorithm.DataSource = new NeuralNetworksProject.MainForm.Methods[] {
+        NeuralNetworksProject.MainForm.Methods.Backpropagation,
+        NeuralNetworksProject.MainForm.Methods.LevenbergMarquardt};
             this.comboAlgorithm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboAlgorithm.FormattingEnabled = true;
             this.comboAlgorithm.Location = new System.Drawing.Point(660, 169);
@@ -399,73 +471,6 @@ namespace NeuralNetworksProject
             this.tabCtrlMain.SelectedIndex = 0;
             this.tabCtrlMain.Size = new System.Drawing.Size(831, 476);
             this.tabCtrlMain.TabIndex = 0;
-            // 
-            // txtbxNeurons
-            // 
-            this.txtbxNeurons.Location = new System.Drawing.Point(646, 92);
-            this.txtbxNeurons.Name = "txtbxNeurons";
-            this.txtbxNeurons.Size = new System.Drawing.Size(102, 20);
-            this.txtbxNeurons.TabIndex = 102;
-            // 
-            // txtbxCities
-            // 
-            this.txtbxCities.Location = new System.Drawing.Point(646, 55);
-            this.txtbxCities.Name = "txtbxCities";
-            this.txtbxCities.Size = new System.Drawing.Size(102, 20);
-            this.txtbxCities.TabIndex = 103;
-            // 
-            // lblCities
-            // 
-            this.lblCities.AutoSize = true;
-            this.lblCities.Location = new System.Drawing.Point(518, 58);
-            this.lblCities.Name = "lblCities";
-            this.lblCities.Size = new System.Drawing.Size(84, 13);
-            this.lblCities.TabIndex = 104;
-            this.lblCities.Text = "Number of Cities";
-            // 
-            // lblNeurons
-            // 
-            this.lblNeurons.AutoSize = true;
-            this.lblNeurons.Location = new System.Drawing.Point(518, 95);
-            this.lblNeurons.Name = "lblNeurons";
-            this.lblNeurons.Size = new System.Drawing.Size(99, 13);
-            this.lblNeurons.TabIndex = 104;
-            this.lblNeurons.Text = "Number of Neurons";
-            // 
-            // btnSetHopfieldNetwork
-            // 
-            this.btnSetHopfieldNetwork.Location = new System.Drawing.Point(601, 146);
-            this.btnSetHopfieldNetwork.Name = "btnSetHopfieldNetwork";
-            this.btnSetHopfieldNetwork.Size = new System.Drawing.Size(75, 23);
-            this.btnSetHopfieldNetwork.TabIndex = 105;
-            this.btnSetHopfieldNetwork.Text = "Set Network";
-            this.btnSetHopfieldNetwork.UseVisualStyleBackColor = true;
-            // 
-            // lblEpochs
-            // 
-            this.lblEpochs.AutoSize = true;
-            this.lblEpochs.Location = new System.Drawing.Point(518, 216);
-            this.lblEpochs.Name = "lblEpochs";
-            this.lblEpochs.Size = new System.Drawing.Size(43, 13);
-            this.lblEpochs.TabIndex = 107;
-            this.lblEpochs.Text = "Epochs";
-            // 
-            // txtbxEpochs
-            // 
-            this.txtbxEpochs.AcceptsReturn = true;
-            this.txtbxEpochs.Location = new System.Drawing.Point(646, 213);
-            this.txtbxEpochs.Name = "txtbxEpochs";
-            this.txtbxEpochs.Size = new System.Drawing.Size(102, 20);
-            this.txtbxEpochs.TabIndex = 106;
-            // 
-            // btnTrainHopfield
-            // 
-            this.btnTrainHopfield.Location = new System.Drawing.Point(601, 262);
-            this.btnTrainHopfield.Name = "btnTrainHopfield";
-            this.btnTrainHopfield.Size = new System.Drawing.Size(75, 23);
-            this.btnTrainHopfield.TabIndex = 108;
-            this.btnTrainHopfield.Text = "Train";
-            this.btnTrainHopfield.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

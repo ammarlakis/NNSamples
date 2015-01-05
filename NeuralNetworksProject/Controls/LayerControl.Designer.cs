@@ -45,6 +45,18 @@
             // 
             // comboLayerAct
             // 
+            this.comboLayerAct.DataSource = new NeuralNetworksProject.LayerControl.Functions[]
+            {
+                NeuralNetworksProject.LayerControl.Functions.Linear,
+                NeuralNetworksProject.LayerControl.Functions.Threashold,
+                NeuralNetworksProject.LayerControl.Functions.Sigmoid,
+                NeuralNetworksProject.LayerControl.Functions.Bibolar,
+                NeuralNetworksProject.LayerControl.Functions.Bernoulli,
+                NeuralNetworksProject.LayerControl.Functions.Gaussian,
+                NeuralNetworksProject.LayerControl.Functions.Identity,
+                NeuralNetworksProject.LayerControl.Functions.RectifiedLinear
+            };
+            this.comboLayerAct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboLayerAct.FormattingEnabled = true;
             this.comboLayerAct.Location = new System.Drawing.Point(6, 42);
             this.comboLayerAct.Name = "comboLayerAct";
