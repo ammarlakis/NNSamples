@@ -98,7 +98,7 @@ namespace NeuralNetworksProject
                 layers[i - 1] = int.Parse(((NumericUpDown) layersControls[i].Controls[1]).Text);
                 functions[i - 1] = Functions[((ComboBox) layersControls[i].Controls[0]).SelectedIndex];
             }
-            //actNet = new ActivationNetwork(new SigmoidFunction(), inputLayerSize, functions, layers);
+            actNet = new ActivationNetwork(functions, inputLayerSize, layers);
         }
 
         private void LoadDataClick(object sender, EventArgs e)
