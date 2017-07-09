@@ -88,8 +88,8 @@ namespace NeuralNetworksProject
             // 
             // ofdlgLoadData
             // 
-            this.ofdlgLoadData.DefaultExt = "xls";
-            this.ofdlgLoadData.Filter = "Excel Worksheets|*.xlsx|CSV Format|*.csv";
+            this.ofdlgLoadData.DefaultExt = "txt";
+            this.ofdlgLoadData.Filter = "Tab-Separated Values File|*.txt";
             this.ofdlgLoadData.Title = "Load Data";
             // 
             // tabpgUnsupervisedLearning
@@ -284,6 +284,7 @@ namespace NeuralNetworksProject
             this.txtbxMomentum.Name = "txtbxMomentum";
             this.txtbxMomentum.Size = new System.Drawing.Size(37, 20);
             this.txtbxMomentum.TabIndex = 5;
+            this.txtbxMomentum.Text = "0";
             this.txtbxMomentum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
             // 
             // txtbxLearningRate
@@ -292,6 +293,7 @@ namespace NeuralNetworksProject
             this.txtbxLearningRate.Name = "txtbxLearningRate";
             this.txtbxLearningRate.Size = new System.Drawing.Size(37, 20);
             this.txtbxLearningRate.TabIndex = 4;
+            this.txtbxLearningRate.Text = "0.1";
             this.txtbxLearningRate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LearningRateInsertionChangeText);
             // 
             // lblMomentum

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using AForge.Neuro;
+using Accord.Neuro;
 
 namespace NeuralNetworksProject
 {

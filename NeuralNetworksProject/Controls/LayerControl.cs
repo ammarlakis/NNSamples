@@ -22,10 +22,11 @@ namespace NeuralNetworksProject
         {
             InitializeComponent();
             this.Location = new Point(number * 150, this.Location.Y);
-            this.lblLayer.Text = "Layer" + number.ToString();
-            this.lblLayer.Name = this.lblLayer.Name + number.ToString();
-            this.numNeuronsLayer.Name = this.numNeuronsLayer.Name + number.ToString();
-            this.comboLayerAct.Name = this.comboLayerAct.Name + number.ToString();
+            this.lblLayer.Text = "Layer" + number;
+            this.lblLayer.Name = this.lblLayer.Name + number;
+            this.numNeuronsLayer.Name = this.numNeuronsLayer.Name + number;
+            this.comboLayerAct.Visible = (number == 0);
+            this.comboLayerAct.Name = this.comboLayerAct.Name + number;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
@@ -13,19 +12,16 @@ using Accord.Math;
 using Accord.Neuro;
 using Accord.Neuro.ActivationFunctions;
 using Accord.Neuro.Learning;
-using AForge;
-using AForge.Neuro;
-using AForge.Neuro.Learning;
 
 namespace NeuralNetworksProject
 {
     public partial class MainForm : Form
     {
-        private static Collection<UserControl>  layersControls = new Collection<UserControl>();
+        private static readonly Collection<UserControl>  layersControls = new Collection<UserControl>();
         private ActivationNetwork actNet;
         private bool stopTraining = true;
         private Thread workerThread;
-        private int epoches;
+        private int epochs;
         private double errorLimit;
         private double[][] input;
         private double[][] target;
@@ -33,21 +29,23 @@ namespace NeuralNetworksProject
 
         private DistanceNetwork dstNet;
         private double[][] citiesMap;
-        
-        private IActivationFunction[] Functions = new IActivationFunction[]
+
+        private readonly IActivationFunction[] Functions =
         {
-            new LinearFunction(), 
-            new ThresholdFunction(), 
-            new SigmoidFunction(), 
-            new BipolarSigmoidFunction(), 
+            new LinearFunction(),
+            new ThresholdFunction(),
+            new SigmoidFunction(),
+            new BipolarSigmoidFunction(),
             new BernoulliFunction(),
-            new GaussianFunction(), 
+            new GaussianFunction(),
             new IdentityFunction(),
             new RectifiedLinearFunction()
         };
+
         private enum Methods
         {
-            Backpropagation = 0, LevenbergMarquardt = 1
+            Backpropagation,
+            LevenbergMarquardt
         }
 
         public MainForm()
@@ -74,10 +72,9 @@ namespace NeuralNetworksProject
             }
         }
 
-
         private void LearningRateInsertionChangeText(object sender, KeyEventArgs e)
         {
-            String testString = ((TextBox)sender).Text;
+            var testString = ((TextBox)sender).Text;
             if (testString != "")
             {
                 double result;
@@ -90,15 +87,14 @@ namespace NeuralNetworksProject
 
         private void SetNetworkClick(object sender, EventArgs e)
         {
-            int inputLayerSize = int.Parse(((NumericUpDown)layersControls[0].Controls[1]).Text);
-            int[] layers = new int[layersControls.Count - 1];
-            IActivationFunction[] functions = new IActivationFunction[layersControls.Count - 1];
+            var inputLayerSize = int.Parse(((NumericUpDown)layersControls[0].Controls[1]).Text);
+            var layers = new int[layersControls.Count - 1];
             for (int i = 1; i < layersControls.Count; i++)
             {
                 layers[i - 1] = int.Parse(((NumericUpDown) layersControls[i].Controls[1]).Text);
-                functions[i - 1] = Functions[((ComboBox) layersControls[i].Controls[0]).SelectedIndex];
             }
-            actNet = new ActivationNetwork(functions, inputLayerSize, layers);
+            var function = Functions[((ComboBox)layersControls[0].Controls[0]).SelectedIndex];
+            actNet = new ActivationNetwork(function, inputLayerSize, layers);
         }
 
         private void LoadDataClick(object sender, EventArgs e)
@@ -108,9 +104,16 @@ namespace NeuralNetworksProject
             {
                 try
                 {
-                    DataTable dataTable = new ExcelReader(ofdlgLoadData.OpenFile(),true,false).GetWorksheet("data");
-                    dataTable.Columns[0].ColumnName = "Input";
-                    dataTable.Columns[1].ColumnName = "Target";
+                    DataTable dataTable;
+                    using (var csvReader = new CsvReader(new StreamReader(ofdlgLoadData.OpenFile()), false, '\t'))
+                    {
+                        dataTable = csvReader.ToTable();
+                        dataTable.Columns[0].ColumnName = "Input";
+                        dataTable.Columns[1].ColumnName = "Target";
+                    }
+
+                    dgviewLoadedData.AutoGenerateColumns = true;
+                    dgviewLoadedData.Columns.Clear();
                     dgviewLoadedData.DataSource = dataTable;
                     input = new double[dgviewLoadedData.RowCount][];
                     target = new double[dgviewLoadedData.RowCount][];
@@ -160,38 +163,42 @@ namespace NeuralNetworksProject
         private void Train()
         {
             stopTraining = false;
-            ArrayList errorsList = new ArrayList();
+            //var errorsList = new ArrayList();
             ISupervisedLearning teacher;
             if (selectedMethod == Methods.Backpropagation)
             {
-                teacher = new BackPropagationLearning(actNet);
-                ((BackPropagationLearning)teacher).LearningRate = double.Parse(txtbxLearningRate.Text);
-                ((BackPropagationLearning)teacher).Momentum = double.Parse(txtbxMomentum.Text);
+                teacher = new BackPropagationLearning(actNet)
+                {
+                    LearningRate = double.Parse(txtbxLearningRate.Text),
+                    Momentum = double.Parse(txtbxMomentum.Text)
+                };
             }
             else if (selectedMethod == Methods.LevenbergMarquardt)
             {
-                teacher = new LevenbergMarquardtLearning(actNet);
-                ((LevenbergMarquardtLearning)teacher).LearningRate = double.Parse(txtbxLearningRate.Text);
+                teacher = new LevenbergMarquardtLearning(actNet)
+                {
+                    LearningRate = double.Parse(txtbxLearningRate.Text),
+                };
             }
             else
             {
                 throw new Exception("No method is selected");
             }
-            int iterations = epoches;
+            var iterations = epochs;
             int percentage;
             while (!stopTraining)
             {
-                double error = teacher.RunEpoch(input, target);
+                var error = teacher.RunEpoch(input, target);
                 if (stopTraining || (error <= errorLimit) || (iterations == 0))
                 {
                     break;
                 }
                 this.Invoke((MethodInvoker)delegate
                 {
-                    percentage = (int) Math.Round((double) (100*(epoches - iterations))/epoches);
+                    percentage = (int)Math.Round((double)(100 * (epochs - iterations)) / epochs);
                     this.progbarTrainingProcess.Value = percentage;
                     this.lblTrainingProcess.Text = "Training (" + percentage + " %" + ")";
-                    chrtError.Series["Error"].Points.Add(new DataPoint(epoches - iterations, error));
+                    chrtError.Series["Error"].Points.Add(new DataPoint(epochs - iterations, error));
                 });
                 iterations--;
             }
@@ -203,6 +210,7 @@ namespace NeuralNetworksProject
                 this.lblTrainingProcess.Text = "Done (100 %)";
             });
         }
+
         private void TestNetworkClick(object sender, EventArgs e)
         {
             if (this.actNet == null)
@@ -219,8 +227,8 @@ namespace NeuralNetworksProject
                     "Output " + (dgviewLoadedData.ColumnCount - 1));
                 for (int i = 0; i < input.Length; i++)
                 {
-                    double[] output = actNet.Compute(input.GetRow(i));
-                    string outputs = Math.Round((decimal)output[0],4).ToString();
+                    var output = actNet.Compute(input.GetRow(i));
+                    var outputs = Math.Round((decimal) output[0], 4).ToString();
                     for (int j = 1; j < output.Length - 1; j++)
                     {
                         outputs += "," + Math.Round((decimal)output[j], 4);
@@ -231,7 +239,6 @@ namespace NeuralNetworksProject
                 }
             }
         }
-
 
         private void ProgramClosing(object sender, FormClosingEventArgs e)
         {
@@ -260,12 +267,13 @@ namespace NeuralNetworksProject
                     break;
             }
         }
+
         public bool ShowTrainingInputDialog()
         {
-            TrainingInputDialog inputDialog = new TrainingInputDialog();
+            var inputDialog = new TrainingInputDialog();
             if (inputDialog.ShowDialog(this) == DialogResult.OK)
             {
-                this.epoches = int.Parse(inputDialog.txtbxEpoches.Text);
+                this.epochs = int.Parse(inputDialog.txtbxEpochs.Text);
                 this.errorLimit = double.Parse(inputDialog.txtbxErrorLimit.Text);
                 inputDialog.Dispose();
                 return true;
@@ -291,8 +299,8 @@ namespace NeuralNetworksProject
             }
             else
             {
-                Form networkDiagramForm = new Form {Size = new Size(600, 400), AutoSize = false, AutoScroll = true};
-                NetworkDiagram netDiagram = new NetworkDiagram(actNet) {Dock = DockStyle.Fill};
+                var networkDiagramForm = new Form { Size = new Size(600, 400), AutoSize = false, AutoScroll = true };
+                var netDiagram = new NetworkDiagram(actNet) { Dock = DockStyle.Fill };
                 networkDiagramForm.Controls.Add(netDiagram);
                 networkDiagramForm.ShowDialog(this);
             }
@@ -307,7 +315,7 @@ namespace NeuralNetworksProject
                 this.dstNet = new DistanceNetwork(cities, neurons);
                 citiesMap = new double[1][];
                 citiesMap[0] = new double[cities];
-                Random r = new Random(); 
+                var r = new Random();
                 for (int i = 0; i < cities; i++)
                 {
                     citiesMap[0][i] = r.NextDouble();
@@ -321,13 +329,12 @@ namespace NeuralNetworksProject
 
         private void btnTrainHopfield_Click(object sender, EventArgs e)
         {
-            int epoches;
-            if ((int.TryParse(txtbxEpochs.Text, out epoches)) && (epoches > 0))
+            int epochs;
+            if ((int.TryParse(txtbxEpochs.Text, out epochs)) && (epochs > 0))
             {
-                
+
             }
         }
 
     }
 }
-
