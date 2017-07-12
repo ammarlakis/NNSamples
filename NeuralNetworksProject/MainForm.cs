@@ -105,7 +105,7 @@ namespace NeuralNetworksProject
                 try
                 {
                     DataTable dataTable;
-                    using (var csvReader = new CsvReader(new StreamReader(ofdlgLoadData.OpenFile()), false, '\t'))
+                    using (var csvReader = new CsvReader(new StreamReader(ofdlgLoadData.OpenFile()), false))
                     {
                         dataTable = csvReader.ToTable();
                         dataTable.Columns[0].ColumnName = "Input";
@@ -223,18 +223,13 @@ namespace NeuralNetworksProject
             }
             else
             {
-                dgviewLoadedData.Columns.Add("Output " + (dgviewLoadedData.ColumnCount - 1),
-                    "Output " + (dgviewLoadedData.ColumnCount - 1));
-                for (int i = 0; i < input.Length; i++)
+                var colName = "Output " + (dgviewLoadedData.ColumnCount - 1);
+                dgviewLoadedData.Columns.Add(colName, colName);
+                for (int i = 0; i < Math.Min(input.Length, 100); i++)
                 {
                     var output = actNet.Compute(input.GetRow(i));
-                    var outputs = Math.Round((decimal) output[0], 4).ToString();
-                    for (int j = 1; j < output.Length - 1; j++)
-                    {
-                        outputs += "," + Math.Round((decimal)output[j], 4);
-                    }
-                    DataGridViewCell cell = new DataGridViewTextBoxCell();
-                    cell.Value = outputs;
+                    var outputs = String.Join(",", output.Select(n => Math.Round((decimal)n, 4)));
+                    var cell = new DataGridViewTextBoxCell { Value = outputs };
                     dgviewLoadedData["Output " + (dgviewLoadedData.ColumnCount - 2), i] = cell;
                 }
             }

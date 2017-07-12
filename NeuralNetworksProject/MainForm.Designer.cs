@@ -87,9 +87,9 @@ namespace NeuralNetworksProject
             this.SuspendLayout();
             // 
             // ofdlgLoadData
-            // 
-            this.ofdlgLoadData.DefaultExt = "txt";
-            this.ofdlgLoadData.Filter = "Tab-Separated Values File|*.txt";
+            //
+            this.ofdlgLoadData.DefaultExt = "csv";
+            this.ofdlgLoadData.Filter = "Comma Separated Values File|*.csv";
             this.ofdlgLoadData.Title = "Load Data";
             // 
             // tabpgUnsupervisedLearning
