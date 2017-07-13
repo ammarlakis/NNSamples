@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,7 @@ using Accord.Math;
 using Accord.Neuro;
 using Accord.Neuro.ActivationFunctions;
 using Accord.Neuro.Learning;
+using Accord.Neuro.ActivationFunctions;
 
 namespace NeuralNetworksProject
 {
@@ -49,15 +51,36 @@ namespace NeuralNetworksProject
         }
 
         public MainForm()
-         {
+        {
             InitializeComponent();
-         }
+            var appSettings = ConfigurationManager.AppSettings;
+            var layers = appSettings["Layers"].Split(',').Select(Int32.Parse).ToArray();
+            for (int i = 0; i < layers.Length; i++)
+            {
+                AddLayerClick(null, null);
+                var layer = (LayerControl) layersControls[i];
+                if (i == 0)
+                {
+                    var comboBox = (ComboBox)layer.Controls[0];
+                    comboBox.SelectedText = appSettings["ActivationFunction"];
+                }
+                var numBox = (NumericUpDown)layer.Controls[1];
+                numBox.Value = layers[i];
+            }
+            var algo = (int)Enum.Parse(typeof(Methods), appSettings["TrainingAlgorithm"]);
+            //this.comboAlgorithm.SelectedIndex = algo;
+            this.txtbxLearningRate.Text = appSettings["LearningRate"];
+            this.txtbxMomentum.Text = appSettings["Momentum"];
+        }
 
         private void AddLayerClick(object sender, EventArgs e)
         {
             layersControls.Add(new LayerControl(layersControls.Count));
             pnlNetTopology.Controls.Add(layersControls[layersControls.Count-1] );
-            btnRemoveLayer.Enabled = true;
+            if (layersControls.Count > 1)
+            {
+                btnRemoveLayer.Enabled = true;
+            }
             btnSetNetwork.Enabled = true;
         }
 
