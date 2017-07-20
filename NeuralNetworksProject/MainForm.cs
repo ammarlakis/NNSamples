@@ -231,7 +231,16 @@ namespace NeuralNetworksProject
                 this.btnTrain.Text = "Train";
                 this.progbarTrainingProcess.Value = 100;
                 this.lblTrainingProcess.Text = "Done (100 %)";
+
+                Save();
             });
+        }
+
+        private void Save()
+        {
+            const string filename = "Network.bin";
+            actNet.Save(filename);
+            MessageBox.Show($"Network saved to file '{filename}'.");
         }
 
         private void TestNetworkClick(object sender, EventArgs e)

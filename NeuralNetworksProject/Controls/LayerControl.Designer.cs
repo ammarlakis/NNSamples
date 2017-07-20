@@ -66,7 +66,7 @@
             // numNeuronsLayer
             //
             this.numNeuronsLayer.Location = new System.Drawing.Point(6, 16);
-            this.numNeuronsLayer.Maximum = new decimal(new int[] {1000, 0, 0, 0});
+            this.numNeuronsLayer.Maximum = new decimal(new int[] {10000, 0, 0, 0});
             this.numNeuronsLayer.Name = "numNeuronsLayer";
             this.numNeuronsLayer.Size = new System.Drawing.Size(120, 20);
             this.numNeuronsLayer.TabIndex = 6;
