@@ -2,12 +2,12 @@
 {
     partial class LayerControl
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -22,8 +22,8 @@
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -33,18 +33,18 @@
             this.numNeuronsLayer = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numNeuronsLayer)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // lblLayer
-            // 
+            //
             this.lblLayer.AutoSize = true;
             this.lblLayer.Location = new System.Drawing.Point(3, 0);
             this.lblLayer.Name = "lblLayer";
             this.lblLayer.Size = new System.Drawing.Size(33, 13);
             this.lblLayer.TabIndex = 4;
             this.lblLayer.Text = "Layer";
-            // 
+            //
             // comboLayerAct
-            // 
+            //
             this.comboLayerAct.DataSource = new NeuralNetworksProject.LayerControl.Functions[]
             {
                 NeuralNetworksProject.LayerControl.Functions.Linear,
@@ -62,16 +62,17 @@
             this.comboLayerAct.Name = "comboLayerAct";
             this.comboLayerAct.Size = new System.Drawing.Size(120, 21);
             this.comboLayerAct.TabIndex = 7;
-            // 
+            //
             // numNeuronsLayer
-            // 
+            //
             this.numNeuronsLayer.Location = new System.Drawing.Point(6, 16);
+            this.numNeuronsLayer.Maximum = new decimal(new int[] {10000, 0, 0, 0});
             this.numNeuronsLayer.Name = "numNeuronsLayer";
             this.numNeuronsLayer.Size = new System.Drawing.Size(120, 20);
             this.numNeuronsLayer.TabIndex = 6;
-            // 
+            //
             // LayerControl
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.comboLayerAct);

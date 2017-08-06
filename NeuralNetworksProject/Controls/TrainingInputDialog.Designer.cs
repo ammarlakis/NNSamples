@@ -30,8 +30,8 @@
         {
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblEpoches = new System.Windows.Forms.Label();
-            this.txtbxEpoches = new System.Windows.Forms.TextBox();
+            this.lblEpochs = new System.Windows.Forms.Label();
+            this.txtbxEpochs = new System.Windows.Forms.TextBox();
             this.txtbxErrorLimit = new System.Windows.Forms.TextBox();
             this.lblErrorLimit = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -56,20 +56,21 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.CancelClick);
             // 
-            // lblEpoches
+            // lblEpochs
             // 
-            this.lblEpoches.Location = new System.Drawing.Point(12, 17);
-            this.lblEpoches.Name = "lblEpoches";
-            this.lblEpoches.Size = new System.Drawing.Size(100, 23);
-            this.lblEpoches.TabIndex = 3;
-            this.lblEpoches.Text = "Epoches    :";
+            this.lblEpochs.Location = new System.Drawing.Point(12, 17);
+            this.lblEpochs.Name = "lblEpochs";
+            this.lblEpochs.Size = new System.Drawing.Size(100, 23);
+            this.lblEpochs.TabIndex = 3;
+            this.lblEpochs.Text = "Epochs     :";
             // 
-            // txtbxEpoches
+            // txtbxEpochs
             // 
-            this.txtbxEpoches.Location = new System.Drawing.Point(144, 14);
-            this.txtbxEpoches.Name = "txtbxEpoches";
-            this.txtbxEpoches.Size = new System.Drawing.Size(100, 20);
-            this.txtbxEpoches.TabIndex = 4;
+            this.txtbxEpochs.Location = new System.Drawing.Point(144, 14);
+            this.txtbxEpochs.Name = "txtbxEpochs";
+            this.txtbxEpochs.Size = new System.Drawing.Size(100, 20);
+            this.txtbxEpochs.TabIndex = 4;
+            this.txtbxEpochs.Text = "500";
             // 
             // txtbxErrorLimit
             // 
@@ -77,6 +78,7 @@
             this.txtbxErrorLimit.Name = "txtbxErrorLimit";
             this.txtbxErrorLimit.Size = new System.Drawing.Size(100, 20);
             this.txtbxErrorLimit.TabIndex = 5;
+            this.txtbxErrorLimit.Text = "0";
             // 
             // lblErrorLimit
             // 
@@ -93,9 +95,9 @@
             this.ClientSize = new System.Drawing.Size(298, 125);
             this.ControlBox = false;
             this.Controls.Add(this.txtbxErrorLimit);
-            this.Controls.Add(this.txtbxEpoches);
+            this.Controls.Add(this.txtbxEpochs);
             this.Controls.Add(this.lblErrorLimit);
-            this.Controls.Add(this.lblEpoches);
+            this.Controls.Add(this.lblEpochs);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -110,8 +112,8 @@
 
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label lblEpoches;
-        public  System.Windows.Forms.TextBox txtbxEpoches;
+        private System.Windows.Forms.Label lblEpochs;
+        public  System.Windows.Forms.TextBox txtbxEpochs;
         public  System.Windows.Forms.TextBox txtbxErrorLimit;
         private System.Windows.Forms.Label lblErrorLimit;
     }

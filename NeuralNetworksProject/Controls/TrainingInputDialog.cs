@@ -5,7 +5,7 @@ namespace NeuralNetworksProject
 {
     public partial class TrainingInputDialog : Form
     {
-        public int epohces;
+        public int epochs;
         public double errorLimit;
         public TrainingInputDialog()
         {
@@ -14,10 +14,10 @@ namespace NeuralNetworksProject
 
         private void OkClick(object sender, EventArgs e)
         {
-            if (int.TryParse(this.txtbxEpoches.Text,out epohces) && double.TryParse(this.txtbxErrorLimit.Text, out errorLimit))
+            if (int.TryParse(this.txtbxEpochs.Text, out epochs) && double.TryParse(this.txtbxErrorLimit.Text, out errorLimit))
             {
                 this.DialogResult = DialogResult.OK;
-                this.Close();                
+                this.Close();
             }
             else
             {

@@ -32,54 +32,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accord">
-      <HintPath>..\packages\Accord.2.14.0\lib\net40\Accord.dll</HintPath>
+    <Reference Include="Accord, Version=3.6.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.3.6.0\lib\net45\Accord.dll</HintPath>
     </Reference>
-    <Reference Include="Accord.Controls">
-      <HintPath>..\packages\Accord.Controls.2.14.0\lib\net40\Accord.Controls.dll</HintPath>
+    <Reference Include="Accord.IO, Version=3.6.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.IO.3.6.0\lib\net45\Accord.IO.dll</HintPath>
     </Reference>
-    <Reference Include="Accord.Imaging">
-      <HintPath>..\packages\Accord.Imaging.2.14.0\lib\net40\Accord.Imaging.dll</HintPath>
+    <Reference Include="Accord.Math, Version=3.6.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Math.3.6.0\lib\net45\Accord.Math.dll</HintPath>
     </Reference>
-    <Reference Include="Accord.IO">
-      <HintPath>..\packages\Accord.IO.2.14.0\lib\net40\Accord.IO.dll</HintPath>
+    <Reference Include="Accord.Math.Core, Version=3.6.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Math.3.6.0\lib\net45\Accord.Math.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Accord.MachineLearning">
-      <HintPath>..\packages\Accord.MachineLearning.2.14.0\lib\net40\Accord.MachineLearning.dll</HintPath>
+    <Reference Include="Accord.Neuro, Version=3.6.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Neuro.3.6.0\lib\net45\Accord.Neuro.dll</HintPath>
     </Reference>
-    <Reference Include="Accord.MachineLearning.GPL">
-      <HintPath>..\packages\Accord.MachineLearning.GPL.2.14.0\lib\net40\Accord.MachineLearning.GPL.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math">
-      <HintPath>..\packages\Accord.Math.2.14.0\lib\net40\Accord.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Statistics">
-      <HintPath>..\packages\Accord.Statistics.2.14.0\lib\net40\Accord.Statistics.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge">
-      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Controls">
-      <HintPath>..\packages\AForge.Controls.2.2.5\lib\AForge.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Genetic">
-      <HintPath>..\packages\AForge.Genetic.2.2.5\lib\AForge.Genetic.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Imaging">
-      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Math">
-      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Neuro, Version=2.2.5.0, Culture=neutral, PublicKeyToken=2094f4ea39731d4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AForge.Neuro.2.2.5\lib\AForge.Neuro.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Video">
-      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    <Reference Include="Accord.Statistics, Version=3.6.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.Statistics.3.6.0\lib\net45\Accord.Statistics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -97,49 +71,6 @@
     <Compile Include="Controls\LayerControl.Designer.cs">
       <DependentUpon>LayerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="lib\Neuro\Activation Functions\Base\IStochasticFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\BernoulliFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\BipolarSigmoidFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\GaussianFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\IActivationFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\IdentityFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\LinearFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\RectifiedLinearFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\SigmoidFunction.cs" />
-    <Compile Include="lib\Neuro\Activation Functions\ThresholdFunction.cs" />
-    <Compile Include="lib\Neuro\Initialization\GaussianWeights.cs" />
-    <Compile Include="lib\Neuro\Initialization\NguyenWidrow.cs" />
-    <Compile Include="lib\Neuro\Layers\ActivationLayer.cs" />
-    <Compile Include="lib\Neuro\Layers\DistanceLayer.cs" />
-    <Compile Include="lib\Neuro\Layers\Layer.cs" />
-    <Compile Include="lib\Neuro\Layers\StochasticLayer.cs" />
-    <Compile Include="lib\Neuro\Learning\BackPropagationLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\ContrastiveDivergenceLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\DeepBeliefNetworkLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\DeepNeuralNetworkLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\DeltaRuleLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\ElasticNetworkLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\EvolutionaryFitness.cs" />
-    <Compile Include="lib\Neuro\Learning\EvolutionaryLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\HebbianLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\ISupervisedLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\IUnsupervisedLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\LevenbergMarquardtLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\ParallelResilientBackPropagationLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\PerceptronLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\ResilientBackPropagationLearning.cs" />
-    <Compile Include="lib\Neuro\Learning\SOMLearning.cs" />
-    <Compile Include="lib\Neuro\Networks\ActivationNetwork.cs" />
-    <Compile Include="lib\Neuro\Networks\DeepBeliefNetwork.cs" />
-    <Compile Include="lib\Neuro\Networks\DistanceNetwork.cs" />
-    <Compile Include="lib\Neuro\Networks\HopfieldNetwork.cs" />
-    <Compile Include="lib\Neuro\Networks\Network.cs" />
-    <Compile Include="lib\Neuro\Networks\RestrictedBoltzmannMachine.cs" />
-    <Compile Include="lib\Neuro\Neurons\ActivationNeuron.cs" />
-    <Compile Include="lib\Neuro\Neurons\DistanceNeuron.cs" />
-    <Compile Include="lib\Neuro\Neurons\Neuron.cs" />
-    <Compile Include="lib\Neuro\Neurons\StochasticNeuron.cs" />
-    <Compile Include="lib\Neuro\Visualization\ActivationMaximization.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,10 +126,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Accord.3.6.0\build\Accord.targets" Condition="Exists('..\packages\Accord.3.6.0\build\Accord.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Accord.3.6.0\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.6.0\build\Accord.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
